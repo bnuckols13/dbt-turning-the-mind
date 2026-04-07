@@ -239,7 +239,7 @@
         }
 
         /* ---- Fork visualization ---- */
-        .fork-container { margin: 1.5rem 0; }
+        .fork-container { margin: 2rem 0; }
         .fork-prompt {
             text-align: center;
             padding: 1.25rem;
@@ -340,9 +340,9 @@
         .fork-path.accept .fork-outcome { background: var(--accent-bg); }
         .fork-path.reject .fork-outcome { background: var(--cool-bg); }
 
-        /* ---- Turning steps (the skill itself) ---- */
-        .turn-steps { margin: 1.5rem 0; }
-        .turn-step {
+        /* ---- Core steps (the skill itself) ---- */
+        .core-steps { margin: 1.5rem 0; }
+        .core-step {
             border: 1px solid var(--border);
             border-radius: 8px;
             overflow: hidden;
@@ -350,38 +350,44 @@
             cursor: pointer;
             transition: border-color 0.15s;
         }
-        .turn-step:hover { border-color: var(--accent); }
-        .turn-step.active { border-color: var(--accent); }
-        .turn-step-header {
+        .core-step:hover { border-color: var(--accent); }
+        .core-step.active { border-color: var(--accent); }
+        .core-step-header {
             display: flex;
             align-items: center;
             gap: 1rem;
             padding: 1rem 1.25rem;
             background: var(--surface);
         }
-        .turn-step-num {
-            font-size: 1.2rem;
+        .core-step-letter {
+            font-size: 1.4rem;
             font-weight: 700;
             color: var(--accent);
             width: 2rem;
             flex-shrink: 0;
             text-align: center;
         }
-        .turn-step-name {
+        .core-step-info { flex: 1; }
+        .core-step-name {
             font-size: 0.95rem;
             font-weight: 600;
             color: var(--text);
         }
-        .turn-step-detail {
+        .core-step-brief {
+            font-size: 0.8rem;
+            color: var(--text-3);
+            margin-top: 0.1rem;
+        }
+        .core-step-detail {
             display: none;
             padding: 1.25rem;
             background: var(--bg);
             border-top: 1px solid var(--border);
         }
-        .turn-step.active .turn-step-detail { display: block; }
-        .turn-step-detail p { font-size: 0.9rem; color: var(--text-2); line-height: 1.75; }
-        .turn-step-detail p + p { margin-top: 0.75rem; }
-        .turn-step-detail .aside {
+        .core-step.active .core-step-detail { display: block; }
+        .core-step-detail p { font-size: 0.9rem; color: var(--text-2); line-height: 1.75; }
+        .core-step-detail p + p { margin-top: 0.75rem; }
+        .core-step-detail .aside {
             margin-top: 0.75rem;
             font-size: 0.85rem;
             font-style: italic;
@@ -389,9 +395,62 @@
             padding-left: 1rem;
             border-left: 2px solid var(--border);
         }
+        .core-step-detail ul { list-style: none; margin-top: 0.5rem; }
+        .core-step-detail ul li {
+            font-size: 0.9rem; color: var(--text-2); line-height: 1.75;
+            padding-left: 1rem; position: relative;
+        }
+        .core-step-detail ul li::before {
+            content: '\00B7'; position: absolute; left: 0; color: var(--text-3);
+        }
 
-        /* ---- Willingness comparison ---- */
-        .compare-grid {
+        /* ---- Body practice cards ---- */
+        .body-cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+            margin: 1.5rem 0;
+        }
+        .body-card {
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: border-color 0.15s;
+        }
+        .body-card:hover { border-color: var(--cool); }
+        .body-card.active { border-color: var(--cool); }
+        .body-card-header {
+            padding: 1rem 1.25rem;
+            background: var(--surface);
+            text-align: center;
+        }
+        .body-card-icon {
+            font-size: 1.5rem;
+            margin-bottom: 0.25rem;
+        }
+        .body-card-name {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+        .body-card-brief {
+            font-size: 0.78rem;
+            color: var(--text-3);
+            margin-top: 0.15rem;
+        }
+        .body-card-detail {
+            display: none;
+            padding: 1.25rem;
+            background: var(--cool-bg);
+            border-top: 1px solid var(--border);
+        }
+        .body-card.active .body-card-detail { display: block; }
+        .body-card-detail p { font-size: 0.88rem; color: var(--text-2); line-height: 1.75; }
+        .body-card-detail p + p { margin-top: 0.75rem; }
+
+        /* ---- Pros/Cons exercise ---- */
+        .proscons {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 0;
@@ -400,39 +459,31 @@
             overflow: hidden;
             margin: 1.5rem 0;
         }
-        .compare-col {
-            padding: 1.5rem 1.25rem;
-        }
-        .compare-col.willing { background: var(--accent-bg); border-right: 1px solid var(--border); }
-        .compare-col.willful { background: var(--cool-bg); }
-        .compare-col-label {
+        .proscons-col { padding: 1.25rem; }
+        .proscons-col.pros { background: var(--accent-bg); border-right: 1px solid var(--border); }
+        .proscons-col.cons { background: var(--cool-bg); }
+        .proscons-label {
             font-size: 0.7rem;
             font-weight: 600;
             letter-spacing: 0.1em;
             text-transform: uppercase;
             margin-bottom: 0.75rem;
         }
-        .compare-col.willing .compare-col-label { color: var(--accent); }
-        .compare-col.willful .compare-col-label { color: var(--cool); }
-        .compare-col-title {
-            font-size: 1.1rem;
+        .proscons-col.pros .proscons-label { color: var(--accent); }
+        .proscons-col.cons .proscons-label { color: var(--cool); }
+        .proscons-title {
+            font-size: 1rem;
             font-weight: 700;
             color: var(--text);
             margin-bottom: 0.75rem;
         }
-        .compare-col ul { list-style: none; }
-        .compare-col ul li {
-            font-size: 0.85rem;
-            color: var(--text-2);
-            line-height: 1.75;
-            padding-left: 1rem;
-            position: relative;
+        .proscons-col ul { list-style: none; }
+        .proscons-col ul li {
+            font-size: 0.85rem; color: var(--text-2); line-height: 1.75;
+            padding-left: 1rem; position: relative;
         }
-        .compare-col ul li::before {
-            content: '\00B7';
-            position: absolute;
-            left: 0;
-            color: var(--text-3);
+        .proscons-col ul li::before {
+            content: '\00B7'; position: absolute; left: 0; color: var(--text-3);
         }
 
         /* ---- Scenario cards ---- */
@@ -457,8 +508,8 @@
             border-radius: 3px;
             margin-bottom: 0.75rem;
         }
-        .scenario-tag.accept { color: var(--accent); background: var(--accent-bg); }
-        .scenario-tag.turning { color: var(--cool); background: var(--cool-bg); }
+        .scenario-tag.observe { color: var(--accent); background: var(--accent-bg); }
+        .scenario-tag.commit { color: var(--cool); background: var(--cool-bg); }
         .scenario-text {
             font-size: 0.95rem;
             color: var(--text);
@@ -566,8 +617,9 @@
             .container { padding: 2rem 1.25rem 3rem; }
             h1 { font-size: 1.8rem; }
             .fork-paths { grid-template-columns: 1fr; }
-            .compare-grid { grid-template-columns: 1fr; }
-            .compare-col.willing { border-right: none; border-bottom: 1px solid var(--border); }
+            .body-cards { grid-template-columns: 1fr; }
+            .proscons { grid-template-columns: 1fr; }
+            .proscons-col.pros { border-right: none; border-bottom: 1px solid var(--border); }
             .options-grid { grid-template-columns: 1fr; }
         }
         @media (prefers-reduced-motion: reduce) {
@@ -582,14 +634,14 @@
     <header class="header">
         <div class="header-label">DBT Skills &mdash; Adult Group</div>
         <h1>Turning the Mind</h1>
-        <p class="subtitle">The repeated choice to stop fighting what is already true</p>
+        <p class="subtitle">Choosing acceptance, over and over, at the fork in the road</p>
     </header>
 
     <nav class="nav">
         <button class="active" onclick="showPage(0, this)">Welcome</button>
-        <button onclick="showPage(1, this)">Acceptance</button>
-        <button onclick="showPage(2, this)">The Turn</button>
-        <button onclick="showPage(3, this)">Willingness</button>
+        <button onclick="showPage(1, this)">The Fork</button>
+        <button onclick="showPage(2, this)">The Skill</button>
+        <button onclick="showPage(3, this)">Body Skills</button>
         <button onclick="showPage(4, this)">Practice</button>
         <button onclick="showPage(5, this)">Discussion</button>
         <button onclick="showPage(6, this)">Closing</button>
@@ -602,19 +654,22 @@
         <div class="section-label warm">Welcome</div>
         <h2><span class="timing">8 to 10 min</span>About today</h2>
         <p class="body-text">
-            Today we're working with one of the hardest skills in DBT. Not the most complicated.
-            The hardest. Because this skill asks you to do the thing your brain is specifically
-            designed not to do: <strong>stop fighting reality</strong>.
+            Today's skill sits inside the distress tolerance module, specifically inside the
+            <strong>reality acceptance skills</strong>. You may have already heard about radical
+            acceptance: the idea that fighting reality creates suffering on top of pain. Turning
+            the Mind is what you do when you've decided to accept something but your mind keeps
+            drifting back to the fight.
         </p>
         <p class="body-text">
-            Turning the Mind is the skill that sits between knowing you need to accept something
-            and actually doing it. It's the moment at the fork in the road where you choose, again,
-            to walk toward acceptance instead of away from it. And then you choose again. And again.
-            Because acceptance isn't a destination. It's a direction you keep turning toward.
+            Acceptance isn't a switch you flip once. It's a direction you face. And the mind
+            turns away from it constantly, especially when the reality is painful. <strong>Turning
+            the Mind is the skill of noticing you've turned away and choosing to turn back.</strong>
+            That's it. You'll do it dozens of times. Maybe hundreds. Each turn is a successful use
+            of the skill.
         </p>
         <p class="body-text">
-            We'll start with what radical acceptance actually means, then learn the turning mechanism itself,
-            and finish with the difference between willingness and willfulness.
+            We'll also learn two body-based companion skills, <strong>half-smiling</strong> and
+            <strong>willing hands</strong>, that help acceptance land physically, not just cognitively.
         </p>
 
         <div class="callout warm">
@@ -623,7 +678,7 @@
         </div>
 
         <div class="callout">
-            <p><strong>You can pass at any point.</strong> This session touches on painful realities. If something is too close right now, say "pass" and we move on. No explanation needed.</p>
+            <p><strong>You can pass at any point.</strong> This session asks you to think about things that are hard to accept. If something is too close right now, say "pass" and we move on. No explanation needed.</p>
         </div>
 
         <hr class="divider">
@@ -636,148 +691,75 @@
             <div class="step">
                 <div class="step-num">1</div>
                 <div class="step-content">
-                    <div class="step-q">What's something in your life right now that you're fighting against? Something that is the way it is whether you like it or not.</div>
-                    <div class="step-hint">Could be big or small. A situation, a person, a fact about yourself. Whatever comes up first.</div>
+                    <div class="step-q">What's something in your life right now that you know is true but part of you keeps refusing to accept?</div>
+                    <div class="step-hint">Could be big or small. A situation, a limitation, a loss, a fact about someone you care about.</div>
                 </div>
             </div>
             <div class="step">
                 <div class="step-num">2</div>
                 <div class="step-content">
-                    <div class="step-q">What does the fighting look like for you? Ruminating, arguing in your head, trying to control things, refusing to think about it?</div>
-                    <div class="step-hint">Everyone fights reality differently. Name your version.</div>
+                    <div class="step-q">How do you know you're not accepting it? What does non-acceptance look like for you?</div>
+                    <div class="step-hint">Ruminating, arguing in your head, avoiding, bitterness, "why me," "it shouldn't be this way." What's your version?</div>
                 </div>
             </div>
             <div class="step">
                 <div class="step-num">3</div>
                 <div class="step-content">
-                    <div class="step-q">Has the fighting changed the thing you're fighting? Or has it mostly just cost you something?</div>
-                    <div class="step-hint">This is not a trick question. Sometimes fighting works. But often the cost is the only thing that's moved.</div>
+                    <div class="step-q">What is the non-acceptance costing you? Energy, sleep, relationships, peace of mind?</div>
+                    <div class="step-hint">The cost of fighting reality is usually easier to name than the reason for the fight.</div>
                 </div>
             </div>
         </div>
 
         <div class="page-nav">
             <button class="ghost">&#8592; Back</button>
-            <button onclick="showPage(1)">Acceptance &#8594;</button>
+            <button onclick="showPage(1)">The Fork &#8594;</button>
         </div>
     </div>
 
 
-    <!-- ======================== ACCEPTANCE ======================== -->
+    <!-- ======================== THE FORK ======================== -->
     <div class="page">
 
-        <div class="section-label warm">The foundation</div>
-        <h2><span class="timing">12 to 15 min</span>What radical acceptance actually means</h2>
+        <div class="section-label warm">The metaphor</div>
+        <h2><span class="timing">8 to 10 min</span>The fork in the road</h2>
         <p class="body-text">
-            Before we can talk about turning the mind, we need to be precise about what
-            we're turning toward. Radical acceptance is the most misunderstood concept in DBT.
-            People hear "acceptance" and think it means giving up, approving, or rolling over.
-            It doesn't mean any of those things.
-        </p>
-
-        <div class="accordion">
-            <div class="acc-item open">
-                <div class="acc-header" onclick="toggleAcc(this)">
-                    <div class="acc-title">What radical acceptance is</div>
-                    <div class="acc-icon">+</div>
-                </div>
-                <div class="acc-body">
-                    <p>Radical acceptance means acknowledging reality as it is, completely and without reservation, in this moment. The word "radical" means all the way through. Complete. Down to the root.</p>
-                    <p>It means letting go of the argument with the way things are. Not the argument about what should happen next, but the argument about what has already happened or what is already true. That argument is over. Reality won.</p>
-                    <ul>
-                        <li><strong>Pain is part of life.</strong> It cannot be avoided entirely. Trying to avoid all pain creates suffering.</li>
-                        <li><strong>Suffering = pain + non-acceptance.</strong> The pain is the thing that happened. The suffering is the refusal to let it be what it is.</li>
-                        <li><strong>The past is the past.</strong> Every event that has already occurred has causes. It couldn't have been different given all the factors in play. That doesn't make it okay. It makes it real.</li>
-                    </ul>
-                    <div class="aside">"It is what it is" can be the most dismissive or the most profound sentence in the language. The difference is whether you mean it.</div>
-                </div>
-            </div>
-
-            <div class="acc-item">
-                <div class="acc-header" onclick="toggleAcc(this)">
-                    <div class="acc-title">What radical acceptance is not</div>
-                    <div class="acc-icon">+</div>
-                </div>
-                <div class="acc-body">
-                    <p>This is where most people get stuck, so this part matters.</p>
-                    <ul>
-                        <li><strong>Not approval.</strong> Accepting that something happened does not mean you think it was okay. You can fully accept that someone hurt you and still believe it was wrong.</li>
-                        <li><strong>Not passivity.</strong> Acceptance is about the past and present. It says nothing about what you do next. You can accept the current situation completely and still work to change it.</li>
-                        <li><strong>Not forgiveness.</strong> Acceptance and forgiveness are different processes. Acceptance doesn't require you to forgive. It requires you to stop arguing with the fact that it happened.</li>
-                        <li><strong>Not a feeling.</strong> Acceptance is a decision, not a feeling. You don't have to feel accepting. You have to choose it.</li>
-                        <li><strong>Not a one-time event.</strong> This is the key to today's session. Acceptance isn't something you achieve and then have forever. It's something you choose, lose, and choose again.</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="acc-item">
-                <div class="acc-header" onclick="toggleAcc(this)">
-                    <div class="acc-title">Why the brain fights acceptance</div>
-                    <div class="acc-icon">+</div>
-                </div>
-                <div class="acc-body">
-                    <p>Your brain is a problem-solving machine. When something is wrong, it activates to fix it. That's adaptive when the problem is solvable. But some problems aren't solvable. They're facts.</p>
-                    <p>When you can't fix reality, the brain doesn't just stop. It keeps running the same loop: this shouldn't be this way, if only, why did this happen, it's not fair. The loop feels productive. It isn't. It's just the brain doing the only thing it knows how to do with an unsolvable problem.</p>
-                    <p>Non-acceptance also serves a function. As long as you're fighting reality, you don't have to feel the full weight of it. The fight is a buffer against grief. That's why people hold onto it. Letting go of the fight means feeling the pain without anything between you and it.</p>
-                    <div class="aside">The fight against reality is exhausting, but it's familiar. Acceptance is simpler, but it requires you to feel what you've been avoiding.</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="callout cool">
-            <div class="callout-label">Facilitator note</div>
-            <p>Expect resistance here. "So I just accept that they abused me?" is the most common pushback. Meet it directly: acceptance does not mean it was okay. It means it happened. The alternative is spending the rest of your life arguing with a fact, and that argument has a cost. Name the cost.</p>
-        </div>
-
-        <div class="page-nav">
-            <button onclick="showPage(0)">&#8592; Welcome</button>
-            <button onclick="showPage(2)">The Turn &#8594;</button>
-        </div>
-    </div>
-
-
-    <!-- ======================== THE TURN ======================== -->
-    <div class="page">
-
-        <div class="section-label warm">The skill</div>
-        <h2><span class="timing">15 to 18 min</span>Turning the Mind</h2>
-        <p class="body-text">
-            Here's the problem with radical acceptance: even when you choose it, it doesn't stick.
-            You accept something at 9am and by 9:15 you're fighting it again. That's not failure.
-            That's how minds work. <strong>Turning the Mind</strong> is the skill for this exact problem.
+            Turning the Mind starts with recognizing that you're standing at a fork. Every moment
+            you're facing a painful reality, two paths are available. One leads toward acceptance.
+            One leads toward rejection. You're always on one of them.
         </p>
         <p class="body-text">
-            Think of it as standing at a fork in the road. One path leads toward acceptance. The other
-            leads toward rejection, bitterness, and the ongoing fight with reality. Every time you notice
-            you've drifted down the rejection path, you turn around and walk back to the fork. Then you
-            choose acceptance again.
+            This isn't a one-time choice. You reach this fork over and over, sometimes dozens of
+            times in a single day. Sometimes dozens of times in an hour. <strong>The skill is
+            choosing the acceptance path each time you arrive at the fork</strong>, knowing you'll
+            likely end up back here again soon.
         </p>
 
         <div class="fork-container">
             <div class="fork-prompt">
                 <div class="fork-prompt-label">The fork</div>
-                <div class="fork-prompt-text">Something painful has happened that you cannot change. You are standing at the fork. Click a path.</div>
+                <div class="fork-prompt-text">Something painful is true and cannot be changed. You're at the fork. Click each path to see where it leads.</div>
             </div>
             <div class="fork-stem"></div>
             <div class="fork-paths">
-                <div class="fork-path accept" onclick="selectFork(this, 'accept')">
+                <div class="fork-path accept" onclick="selectFork(this)">
                     <div class="fork-path-header">
                         <div class="fork-path-dir">Turn toward</div>
                         <div class="fork-path-title">Acceptance</div>
                     </div>
                     <div class="fork-path-body">
                         <ul>
-                            <li>Acknowledge reality without fighting it</li>
-                            <li>Let yourself feel the pain without adding the struggle</li>
+                            <li>Acknowledge reality without arguing with it</li>
+                            <li>Let yourself feel the pain without adding the fight</li>
+                            <li>Free up energy for what you can actually influence</li>
                             <li>Open yourself to what comes next</li>
-                            <li>Free up energy that was going to the fight</li>
                         </ul>
                     </div>
                     <div class="fork-outcome">
-                        <strong>What happens down this path:</strong> The pain is still there. It might even feel sharper at first because you're not buffering it with anger or denial. But the suffering, the layer on top of the pain, starts to decrease. Energy comes back. You can think about what to do next instead of being stuck in what already happened.
+                        <strong>Down this path:</strong> The pain is still there. It might even feel sharper at first because you're not buffering it with anger or denial. But the suffering, the layer of anguish on top of the pain, starts to decrease. You can think about what to do next instead of being stuck in what already happened.
                     </div>
                 </div>
-                <div class="fork-path reject" onclick="selectFork(this, 'reject')">
+                <div class="fork-path reject" onclick="selectFork(this)">
                     <div class="fork-path-header">
                         <div class="fork-path-dir">Turn away</div>
                         <div class="fork-path-title">Rejection</div>
@@ -785,175 +767,216 @@
                     <div class="fork-path-body">
                         <ul>
                             <li>Argue with the fact that it happened</li>
-                            <li>Replay how it should have gone differently</li>
-                            <li>Refuse to let go of the injustice</li>
-                            <li>Stay locked in the fight</li>
+                            <li>Replay how things should have gone</li>
+                            <li>Say "I can't stand this" or "it's not fair"</li>
+                            <li>Stay locked in the fight with what is</li>
                         </ul>
                     </div>
                     <div class="fork-outcome">
-                        <strong>What happens down this path:</strong> The pain stays exactly the same, because rejecting reality doesn't change it. But suffering piles on top. Bitterness, exhaustion, rage, helplessness. The fight consumes energy that could go to anything else. The past takes up more and more space in the present.
+                        <strong>Down this path:</strong> The pain stays exactly the same, because rejecting reality doesn't change it. But suffering piles on. Bitterness, exhaustion, rage, helplessness. The fight consumes energy that could go to anything else. The past takes up more and more space in the present.
                     </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="callout warm">
+            <div class="callout-label">Critical distinction</div>
+            <p><strong>Acceptance does not mean approval.</strong> You can accept that something happened and still believe it was wrong. Acceptance is about the past and present. It says nothing about what you do next. You can fully accept reality and still work to change it.</p>
+        </div>
+
+        <div class="callout cool">
+            <div class="callout-label">Facilitator note</div>
+            <p>Expect the question: "So I just accept that they abused me?" Meet it directly. Acceptance means it happened. Not that it was okay. Not that you forgive. Not that you stop seeking justice. It means you stop spending energy arguing with the fact that it occurred. That argument has a cost. Name the cost.</p>
+        </div>
+
+        <div class="page-nav">
+            <button onclick="showPage(0)">&#8592; Welcome</button>
+            <button onclick="showPage(2)">The Skill &#8594;</button>
+        </div>
+    </div>
+
+
+    <!-- ======================== THE SKILL ======================== -->
+    <div class="page">
+
+        <div class="section-label warm">The skill</div>
+        <h2><span class="timing">15 to 18 min</span>How Turning the Mind works</h2>
+        <p class="body-text">
+            Turning the Mind has three core steps and one strengthening exercise.
+            The steps are simple. The practice is relentless. Click each one.
+        </p>
+
+        <div class="core-steps">
+            <div class="core-step active" onclick="toggleCoreStep(this)">
+                <div class="core-step-header">
+                    <div class="core-step-letter">A</div>
+                    <div class="core-step-info">
+                        <div class="core-step-name">Observe that you are not accepting</div>
+                        <div class="core-step-brief">Notice the signs of non-acceptance</div>
+                    </div>
+                </div>
+                <div class="core-step-detail">
+                    <p>The first step is noticing you've turned away from acceptance. You can't turn back if you don't know you've left. Non-acceptance shows up in different channels:</p>
+                    <ul>
+                        <li><strong>Thoughts:</strong> "Why me?" "This shouldn't be happening." "I can't stand this." "It's not fair." Ruminating, rehearsing, bargaining with the past.</li>
+                        <li><strong>Emotions:</strong> Bitterness, resentment, frustration that won't resolve, a stuck quality to your anger or grief.</li>
+                        <li><strong>Body:</strong> Muscle tension, clenched jaw, tight chest, elevated heart rate, temperature changes.</li>
+                        <li><strong>Behavior:</strong> Avoiding the topic, jumping into problem-solving mode to avoid feeling, numbing out, picking fights about unrelated things.</li>
+                    </ul>
+                    <p>When you notice any of these, label it: <strong>"I'm not accepting right now."</strong> That's not a judgment. It's an observation. And it's step one done.</p>
+                    <div class="aside">You're not failing when you notice you've turned away. Noticing is the skill working.</div>
+                </div>
+            </div>
+
+            <div class="core-step" onclick="toggleCoreStep(this)">
+                <div class="core-step-header">
+                    <div class="core-step-letter">B</div>
+                    <div class="core-step-info">
+                        <div class="core-step-name">Make an inner commitment to accept</div>
+                        <div class="core-step-brief">Choose it deliberately, even without feeling it</div>
+                    </div>
+                </div>
+                <div class="core-step-detail">
+                    <p>Say to yourself: <strong>"I'm going to practice accepting this."</strong> You can fill in the blank: this situation, these emotions, this loss, this fact about my life.</p>
+                    <p>This is the most important distinction in the whole skill: <strong>the commitment to accept is not the same thing as acceptance.</strong> You don't have to feel accepting. You don't have to be at peace. You just have to make the choice to face toward acceptance rather than away from it.</p>
+                    <p>Think of it like choosing to face the sun. You might still be cold. You might still be in pain. But you've turned in the direction that eventually leads to warmth. The commitment puts you on the path. Actually arriving takes time.</p>
+                    <div class="aside">The inner commitment is a decision, not a feeling. You're not waiting to feel ready. You're choosing to begin.</div>
+                </div>
+            </div>
+
+            <div class="core-step" onclick="toggleCoreStep(this)">
+                <div class="core-step-header">
+                    <div class="core-step-letter">C</div>
+                    <div class="core-step-info">
+                        <div class="core-step-name">Repeat A and B, over and over</div>
+                        <div class="core-step-brief">This is the practice, not a sign of failure</div>
+                    </div>
+                </div>
+                <div class="core-step-detail">
+                    <p>Here's the part most people don't expect: you will turn away again. Maybe in five minutes. Maybe in thirty seconds. The more painful the reality, the faster the mind turns away. That is completely normal.</p>
+                    <p>Each time you notice you've turned away (Step A), you make the commitment again (Step B). That's one complete rep of the skill. Some days you might do fifty reps. That's fifty successful uses of Turning the Mind, not fifty failures.</p>
+                    <p>Over time, the turns get faster. The gap between noticing and recommitting shrinks. You spend more time on the acceptance path and less time lost on the rejection path. But the need to turn never fully goes away for the hardest realities. The practice is the turning, not the arriving.</p>
+                </div>
+            </div>
+
+            <div class="core-step" onclick="toggleCoreStep(this)">
+                <div class="core-step-header">
+                    <div class="core-step-letter">+</div>
+                    <div class="core-step-info">
+                        <div class="core-step-name">Develop a plan for catching yourself</div>
+                        <div class="core-step-brief">Know your personal signs so you can turn faster</div>
+                    </div>
+                </div>
+                <div class="core-step-detail">
+                    <p>Build awareness of your personal non-acceptance signature. Everyone has one. For some people it's a specific thought loop. For others it's a physical sensation. For others it's a behavior pattern.</p>
+                    <p>Once you know your signs, you can set up internal checkpoints: "When I notice I'm rehearsing that conversation again, that's my cue to turn." "When my jaw clenches, that's data." "When I start scrolling at 1am, that's avoidance." The more specific the cue, the faster the catch.</p>
+                    <p>Some people also use external reminders: a note on the mirror, a bracelet they touch, a word they say to themselves. Whatever creates a reliable trigger to check in.</p>
                 </div>
             </div>
         </div>
 
         <hr class="divider">
 
-        <div class="section-label warm">How to do it</div>
-        <h2>The turning process</h2>
+        <div class="section-label cool">Strengthening the commitment</div>
+        <h2>Pros and cons of accepting</h2>
         <p class="body-text">
-            Turning the Mind is not complicated. It's simple and relentless. Click each step.
+            When the commitment is hard to make, it helps to look clearly at what accepting costs
+            you and what refusing to accept costs you. Neither path is free.
         </p>
 
-        <div class="turn-steps">
-            <div class="turn-step active" onclick="toggleTurnStep(this)">
-                <div class="turn-step-header">
-                    <div class="turn-step-num">1</div>
-                    <div class="turn-step-name">Observe that you've turned away</div>
+        <div class="proscons">
+            <div class="proscons-col pros">
+                <div class="proscons-label">If I accept this reality</div>
+                <div class="proscons-title">What I gain</div>
+                <ul>
+                    <li>Energy comes back from the fight</li>
+                    <li>I can think about what to do next</li>
+                    <li>The suffering layer starts to decrease</li>
+                    <li>I can be present in my actual life</li>
+                    <li>Relationships improve when I stop being bitter</li>
+                </ul>
+            </div>
+            <div class="proscons-col cons">
+                <div class="proscons-label">If I keep fighting this reality</div>
+                <div class="proscons-title">What it costs me</div>
+                <ul>
+                    <li>Energy stays locked in the fight</li>
+                    <li>Suffering builds on top of the pain</li>
+                    <li>I stay stuck in the past</li>
+                    <li>Bitterness and exhaustion compound</li>
+                    <li>Nothing actually changes about the reality</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="callout cool">
+            <div class="callout-label">Facilitator note</div>
+            <p>Have the group do this exercise for their own situation from the check-in. Ask them to honestly list what they get from non-acceptance too. The fight against reality usually serves a function: it buffers against grief, it maintains a sense of control, it feels like justice. Name the function without judging it, then ask whether the cost is still worth paying.</p>
+        </div>
+
+        <div class="page-nav">
+            <button onclick="showPage(1)">&#8592; The Fork</button>
+            <button onclick="showPage(3)">Body Skills &#8594;</button>
+        </div>
+    </div>
+
+
+    <!-- ======================== BODY SKILLS ======================== -->
+    <div class="page">
+
+        <div class="section-label cool">The body's role</div>
+        <h2><span class="timing">10 to 12 min</span>Half-Smiling &amp; Willing Hands</h2>
+        <p class="body-text">
+            Turning the Mind is a cognitive skill: you notice a thought pattern and make a decision.
+            But acceptance doesn't live only in the mind. Your body holds non-acceptance too,
+            in clenched fists, tight jaw, braced posture. These two companion skills help your
+            body participate in the turn.
+        </p>
+        <p class="body-text">
+            The science behind them is simple: your brain reads your own body. When your face is
+            tense and your fists are clenched, your brain interprets that as threat and escalates.
+            When your face softens and your hands open, your brain reads safety and begins to
+            de-escalate. <strong>You can use the body to lead the mind toward acceptance.</strong>
+        </p>
+
+        <div class="body-cards">
+            <div class="body-card active" onclick="toggleBodyCard(this)">
+                <div class="body-card-header">
+                    <div class="body-card-name">Half-Smiling</div>
+                    <div class="body-card-brief">Let your face communicate acceptance</div>
                 </div>
-                <div class="turn-step-detail">
-                    <p>Notice that you're fighting reality. You're ruminating, rehearsing arguments, bargaining with the past, or refusing to acknowledge what's true. This is the most important step because you can't turn toward acceptance if you don't notice you've turned away.</p>
-                    <p>Signs you've turned away: replaying the same thought loop, clenching physically, using words like "should," "shouldn't," "it's not fair," "why me." The feeling is often a combination of anger and exhaustion.</p>
-                    <div class="aside">You're not failing when you notice you've turned away. You're succeeding at step one.</div>
+                <div class="body-card-detail">
+                    <p><strong>How to do it:</strong> Relax your face completely. Let go of tension in your forehead, around your eyes, in your jaw. Then lift the corners of your mouth just slightly. Not a grin. Not a smile anyone else would notice. Just the faintest upturn. Think Mona Lisa, not smiley face.</p>
+                    <p><strong>Why it works:</strong> Facial muscles send feedback to the brain about your emotional state. A tense face signals threat. A relaxed face with a slight smile signals safety. Your emotional state follows. This isn't fake happiness. It's a physical cue that tells your nervous system the fight can stand down.</p>
+                    <p><strong>When to practice:</strong> Start when you're not distressed. While waking up, waiting in line, listening to music. Build the pathway before you need it under stress. Then use it when you notice non-acceptance in your body.</p>
                 </div>
             </div>
 
-            <div class="turn-step" onclick="toggleTurnStep(this)">
-                <div class="turn-step-header">
-                    <div class="turn-step-num">2</div>
-                    <div class="turn-step-name">Make an inner commitment to accept</div>
+            <div class="body-card" onclick="toggleBodyCard(this)">
+                <div class="body-card-header">
+                    <div class="body-card-name">Willing Hands</div>
+                    <div class="body-card-brief">Let your hands communicate openness</div>
                 </div>
-                <div class="turn-step-detail">
-                    <p>Choose acceptance. Deliberately. It's not a feeling. It's a decision. You might say something internally like: "This is what happened. I'm choosing to accept it." or "I'm turning my mind toward acceptance right now."</p>
-                    <p>The commitment doesn't have to be grand or spiritual. It just has to be intentional. You're choosing to stop the fight, for now, in this moment. You're not promising to accept it forever. You're choosing to accept it right now.</p>
-                </div>
-            </div>
-
-            <div class="turn-step" onclick="toggleTurnStep(this)">
-                <div class="turn-step-header">
-                    <div class="turn-step-num">3</div>
-                    <div class="turn-step-name">Do it with your whole self</div>
-                </div>
-                <div class="turn-step-detail">
-                    <p>Acceptance isn't just cognitive. It lives in the body too. When you make the choice, let your body participate. Unclench your hands. Drop your shoulders. Breathe into the tight places. Let your face soften.</p>
-                    <p>Half-acceptance, where you say the words but your body stays braced for the fight, doesn't work. The body holds the rejection even when the mind lets go. Both have to turn.</p>
-                    <div class="aside">Try it right now. Think of something you've been fighting. Say to yourself "I accept this." Notice what your body does in response. That's the data.</div>
-                </div>
-            </div>
-
-            <div class="turn-step" onclick="toggleTurnStep(this)">
-                <div class="turn-step-header">
-                    <div class="turn-step-num">4</div>
-                    <div class="turn-step-name">Expect to turn away again</div>
-                </div>
-                <div class="turn-step-detail">
-                    <p>This is not a sign of failure. This is how the skill works. You will turn away. The mind does this automatically, especially with painful realities. The skill is not "accept once and hold." The skill is "notice you've turned away, and turn back."</p>
-                    <p>Some days you might need to turn back fifty times. That's fifty successful uses of the skill, not fifty failures. The practice is the turning, not the staying.</p>
-                </div>
-            </div>
-
-            <div class="turn-step" onclick="toggleTurnStep(this)">
-                <div class="turn-step-header">
-                    <div class="turn-step-num">5</div>
-                    <div class="turn-step-name">Develop a plan for catching yourself</div>
-                </div>
-                <div class="turn-step-detail">
-                    <p>Build awareness of your personal signs of non-acceptance. For some people it's a thought pattern. For others it's a physical sensation. For others it's a behavior, like checking their phone, or picking a fight, or numbing out.</p>
-                    <p>Once you know your signs, you can set up internal checkpoints. "When I notice I'm rehearsing that conversation again, that's my cue to turn." The more specific the cue, the faster the catch.</p>
+                <div class="body-card-detail">
+                    <p><strong>How to do it:</strong> Unclench your fists. Turn your palms face-up on your legs or at your sides. Let your fingers relax completely. Don't hold anything. Just open.</p>
+                    <p><strong>Why it works:</strong> Clenched fists are the body's posture of fighting or holding on. Open palms are the posture of receiving and letting go. When you open your hands, you're signaling to your nervous system that you're willing to receive what's here rather than fight it.</p>
+                    <p><strong>When to practice:</strong> Same as half-smiling: start in low-stakes moments. Try it right now. Notice how your emotional state shifts, even slightly, when you move from clenched to open. That shift is the skill in action.</p>
                 </div>
             </div>
         </div>
 
         <div class="callout warm">
-            <div class="callout-label">The key insight</div>
-            <p>Turning the Mind is not a one-time event. It's a <strong>practice</strong>. Every time you turn back toward acceptance, you're building the neural pathway that makes the next turn easier. The first hundred turns are the hardest. It gets easier not because reality changes, but because you do.</p>
+            <div class="callout-label">Experiential exercise</div>
+            <p>Let's try this together. Think about the reality you named in the check-in, the thing you're having trouble accepting. Now: unclench your hands. Turn your palms up. Relax your face. Lift the corners of your mouth just barely. Breathe. Say to yourself: "I'm going to practice accepting this." Notice what shifts. <strong>That is Turning the Mind with your whole self.</strong></p>
+        </div>
+
+        <div class="callout cool">
+            <div class="callout-label">Facilitator note</div>
+            <p>Do this exercise live with the group. Give them 30-60 seconds of silence with their eyes closed or gaze lowered. The combination of the cognitive commitment with the body posture is significantly more powerful than either alone. Process briefly afterward: what did they notice? What changed, even slightly?</p>
         </div>
 
         <div class="page-nav">
-            <button onclick="showPage(1)">&#8592; Acceptance</button>
-            <button onclick="showPage(3)">Willingness &#8594;</button>
-        </div>
-    </div>
-
-
-    <!-- ======================== WILLINGNESS ======================== -->
-    <div class="page">
-
-        <div class="section-label cool">The stance</div>
-        <h2><span class="timing">10 to 12 min</span>Willingness vs. Willfulness</h2>
-        <p class="body-text">
-            Once you've turned toward acceptance, you need a stance for staying there. DBT calls
-            this <strong>willingness</strong>. Its opposite is <strong>willfulness</strong>. The
-            difference between the two is the difference between working with reality and working
-            against it.
-        </p>
-
-        <div class="compare-grid">
-            <div class="compare-col willing">
-                <div class="compare-col-label">Acceptance in action</div>
-                <div class="compare-col-title">Willingness</div>
-                <ul>
-                    <li>Doing what is needed in the moment</li>
-                    <li>Responding to the situation as it actually is</li>
-                    <li>Participating fully even when it's uncomfortable</li>
-                    <li>Listening to your wise mind</li>
-                    <li>Acting on your values even when you don't feel like it</li>
-                    <li>Allowing life to be what it is</li>
-                </ul>
-            </div>
-            <div class="compare-col willful">
-                <div class="compare-col-label">Non-acceptance in action</div>
-                <div class="compare-col-title">Willfulness</div>
-                <ul>
-                    <li>Refusing to do what works because you shouldn't have to</li>
-                    <li>Trying to fix the situation by insisting it be different</li>
-                    <li>Giving up entirely when you can't control the outcome</li>
-                    <li>Acting from spite, stubbornness, or revenge</li>
-                    <li>Sitting on your hands because you're angry at the universe</li>
-                    <li>Demanding that life be fair before you'll participate</li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="accordion">
-            <div class="acc-item open">
-                <div class="acc-header" onclick="toggleAcc(this)">
-                    <div class="acc-title">Why willfulness feels justified</div>
-                    <div class="acc-icon">+</div>
-                </div>
-                <div class="acc-body">
-                    <p>Willfulness almost always feels righteous. That's what makes it so sticky. "I shouldn't have to deal with this." "It's not fair." "They should be the one fixing this, not me." Every one of those thoughts might be true. And none of them change the situation.</p>
-                    <p>Willfulness is what happens when you let your assessment of what's fair determine whether you'll engage with what's real. It feels like standing your ground. It functions like standing still while the water rises.</p>
-                    <div class="aside">The most willful sentence in the English language is "I shouldn't have to." It might be true. It's also the most reliable way to stay stuck.</div>
-                </div>
-            </div>
-
-            <div class="acc-item">
-                <div class="acc-header" onclick="toggleAcc(this)">
-                    <div class="acc-title">Both show up as giving up</div>
-                    <div class="acc-icon">+</div>
-                </div>
-                <div class="acc-body">
-                    <p>Willfulness doesn't always look like fighting. Sometimes it looks like collapsing. "Fine. Nothing matters anyway. I'll just give up." That's not acceptance. That's willfulness wearing the costume of surrender. Acceptance is alive and engaged. Willful giving up is a refusal to participate because you can't have what you want.</p>
-                    <p>The test: if you're giving up with bitterness, resentment, or spite, it's willfulness. If you're letting go with openness and readiness for what comes next, it's acceptance.</p>
-                </div>
-            </div>
-
-            <div class="acc-item">
-                <div class="acc-header" onclick="toggleAcc(this)">
-                    <div class="acc-title">How to catch willfulness in the body</div>
-                    <div class="acc-icon">+</div>
-                </div>
-                <div class="acc-body">
-                    <p>Willfulness has a physical signature. Clenched jaw. Crossed arms. Tight chest. The posture of refusal. Willingness has a different one: open hands, relaxed face, soft belly, feet on the ground.</p>
-                    <p>When you're not sure which stance you're in, check your body first. The body often knows before the mind does. If you're physically braced against reality, you're in willfulness no matter what you're telling yourself.</p>
-                    <div class="aside">Try this: unclench your hands right now. Open your palms face-up on your legs. Notice what happens to your emotional state. That small physical shift is a micro-turn toward willingness.</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="page-nav">
-            <button onclick="showPage(2)">&#8592; The Turn</button>
+            <button onclick="showPage(2)">&#8592; The Skill</button>
             <button onclick="showPage(4)">Practice &#8594;</button>
         </div>
     </div>
@@ -963,23 +986,24 @@
     <div class="page">
 
         <div class="section-label warm">Practice</div>
-        <h2><span class="timing">15 to 20 min</span>Finding the turn</h2>
+        <h2><span class="timing">15 to 18 min</span>Finding the turn</h2>
         <p class="body-text">
-            For each scenario, identify: What reality is being fought? Where is the fork?
-            What would turning the mind look like? Then tap to compare.
+            For each scenario, identify: What is the non-acceptance? What are the signs?
+            What would the inner commitment sound like? Then tap to compare.
         </p>
 
         <div class="scenario-stack">
 
             <div class="scenario-card">
                 <div class="scenario-body">
-                    <div class="scenario-tag accept">Radical acceptance</div>
-                    <p class="scenario-text">A woman was passed over for a promotion she'd been working toward for two years. The job went to someone with less experience. She spends every evening rehearsing what she should have said in the interview, composing emails she'll never send, and telling anyone who will listen that the decision was political.</p>
-                    <div class="scenario-prompt">Where is the fork? What would turning the mind look like?</div>
+                    <div class="scenario-tag observe">Step A: Observe</div>
+                    <p class="scenario-text">A man's partner ended their relationship three months ago. He replays their last conversation constantly, editing what he said, imagining how it could have gone differently. He checks her social media several times a day. He tells friends he's "processing" but hasn't moved anything forward in his life.</p>
+                    <div class="scenario-prompt">What are the signs of non-acceptance? What is he fighting?</div>
                 </div>
                 <div class="scenario-reveal" id="s0">
-                    <p><strong>The reality:</strong> She didn't get the promotion. That has already happened and cannot be changed by any amount of rehearsal or righteous anger.</p>
-                    <p><strong>The turn:</strong> "I didn't get the job. That's what happened. The decision may have been unfair and it's still the decision that was made." From there, willingness opens up options: update the resume, have a direct conversation with leadership about her path, decide whether this organization is where she wants to stay. All of those require accepting what happened first. The rumination loop keeps her at the fork, choosing the rejection path over and over.</p>
+                    <p><strong>The signs:</strong> Rumination (replaying and editing the conversation), checking behavior (social media monitoring), cognitive bargaining ("if only I'd said..."), and stalled life functioning. The word "processing" is doing a lot of work here, masking what is actually a refusal to let the relationship be over.</p>
+                    <p><strong>The reality being fought:</strong> The relationship ended. That's what happened. No amount of replay changes the conversation that already occurred.</p>
+                    <p><strong>The inner commitment:</strong> "The relationship is over. I'm going to practice accepting that." He doesn't have to feel okay about it. He just has to stop editing the past and start facing the present.</p>
                 </div>
                 <div class="reveal-btn-row">
                     <button class="reveal-btn" onclick="revealScenario('s0', this)">Show response</button>
@@ -988,14 +1012,14 @@
 
             <div class="scenario-card">
                 <div class="scenario-body">
-                    <div class="scenario-tag turning">Turning the mind</div>
-                    <p class="scenario-text">A man's adult daughter has cut off contact with him. He calls every week and she doesn't answer. He sends gifts that come back unopened. His friends tell him to give her space, but he says he can't just do nothing. "She's my daughter. I can't accept that she doesn't want to talk to me."</p>
-                    <div class="scenario-prompt">What is he refusing to accept? What is the cost of the refusal?</div>
+                    <div class="scenario-tag commit">Step B: Commit</div>
+                    <p class="scenario-text">A woman was diagnosed with a chronic illness that limits her energy. She keeps signing up for commitments at the same pace as before, crashing, then berating herself for being "lazy." She refuses to use the word "disability" and says she's going to "beat this."</p>
+                    <div class="scenario-prompt">What would the inner commitment to accept sound like here? What's the difference between acceptance and giving up?</div>
                 </div>
                 <div class="scenario-reveal" id="s1">
-                    <p><strong>The reality he's fighting:</strong> His daughter, right now, does not want contact. That's the fact. Not forever necessarily, but right now.</p>
-                    <p><strong>The cost:</strong> Every unreturned call reinforces his pain and possibly pushes her further away. The inability to sit with the reality is driving the very behavior that may be making it worse. His "I can't accept this" is actually "I refuse to accept this," and the refusal is the willfulness.</p>
-                    <p><strong>The turn:</strong> "My daughter has pulled away. I don't know all her reasons. I can accept this is where we are right now without accepting that it's permanent." Willingness might look like respecting her boundary, doing his own therapeutic work, and being available without pursuing.</p>
+                    <p><strong>The inner commitment:</strong> "I have a condition that limits my energy. I'm going to practice accepting that my capacity has changed." Not forever necessarily, but right now. This is what's true today.</p>
+                    <p><strong>Acceptance vs. giving up:</strong> Acceptance opens the door to actual management: pacing, prioritizing, using adaptive strategies. "Beating this" through sheer willpower is non-acceptance dressed as strength, and the crash cycle is the cost. Giving up would be collapse with bitterness. Acceptance is engaging with reality as it actually is.</p>
+                    <p><strong>The body skills:</strong> Notice how non-acceptance lives in her body too, the bracing, the pushing through, the refusal to slow down. Willing hands and half-smile here would mean letting her body match the commitment: softening, releasing the fight posture.</p>
                 </div>
                 <div class="reveal-btn-row">
                     <button class="reveal-btn" onclick="revealScenario('s1', this)">Show response</button>
@@ -1004,14 +1028,14 @@
 
             <div class="scenario-card">
                 <div class="scenario-body">
-                    <div class="scenario-tag accept">Willingness vs. willfulness</div>
-                    <p class="scenario-text">A group member is in recovery from alcohol use disorder. She's been sober for eight months but says: "I shouldn't have to go to meetings for the rest of my life. Normal people don't have to do this. I should be able to just have a drink like everyone else."</p>
-                    <div class="scenario-prompt">Where is the willfulness? What would willingness look like?</div>
+                    <div class="scenario-tag observe">Step C: Repeat</div>
+                    <p class="scenario-text">A group member says: "I accepted that my dad is never going to apologize. I really did, last Tuesday. I felt at peace for like two hours. Then I saw his number come up on my phone and I was right back to being furious. So I guess I didn't actually accept it."</p>
+                    <div class="scenario-prompt">Did she fail at acceptance? What would you say to her?</div>
                 </div>
                 <div class="scenario-reveal" id="s2">
-                    <p><strong>The willfulness:</strong> "I shouldn't have to." She's measuring her reality against someone else's and refusing to participate in what works because it doesn't feel fair. Every "should" is a fight with the way things actually are for her.</p>
-                    <p><strong>The turn:</strong> "I have a different relationship with alcohol than some people. That's the reality. Meetings are a tool that works for me." Willingness doesn't mean loving the meetings. It means going because it serves her life, even though she wishes she didn't need to.</p>
-                    <p>Notice that acceptance here doesn't mean giving up hope. It means engaging with her actual situation rather than the one she wishes she had.</p>
+                    <p><strong>She didn't fail.</strong> She successfully turned her mind toward acceptance on Tuesday. Then her mind turned away when the trigger came. That's not failure. That's exactly how this works.</p>
+                    <p>The skill isn't "accept once and stay there forever." The skill is: notice you've turned away (the fury when his name appeared), make the commitment again ("I'm going to practice accepting that he's not going to apologize"), and keep going. The two hours of peace were real. The return of the fury is normal. The next turn back toward acceptance is the next rep.</p>
+                    <p>This is the most important teaching point in the whole session: <strong>the need to repeat is the skill, not a sign the skill isn't working.</strong></p>
                 </div>
                 <div class="reveal-btn-row">
                     <button class="reveal-btn" onclick="revealScenario('s2', this)">Show response</button>
@@ -1020,14 +1044,14 @@
 
             <div class="scenario-card">
                 <div class="scenario-body">
-                    <div class="scenario-tag turning">Turning the mind</div>
-                    <p class="scenario-text">A man was diagnosed with a chronic pain condition six months ago. He's tried multiple treatments, none have eliminated the pain. He refuses to use adaptive equipment his doctor recommended, saying "I'm not disabled. I'm going to beat this." He pushes through pain until he's bedridden for days, then the cycle repeats.</p>
-                    <div class="scenario-prompt">What reality is he fighting? What does the turn look like here?</div>
+                    <div class="scenario-tag commit">Full skill</div>
+                    <p class="scenario-text">A man's adult son is in active addiction. The father has been to Al-Anon, he knows the concepts, but he keeps bailing his son out of financial trouble, making excuses to family, and losing sleep rehearsing conversations where he finally says the right thing to make his son stop using.</p>
+                    <div class="scenario-prompt">Walk through all three steps. Where is A, B, and C in this situation?</div>
                 </div>
                 <div class="scenario-reveal" id="s3">
-                    <p><strong>The reality:</strong> He has chronic pain. The treatments haven't eliminated it. The condition, as it stands now, requires accommodation. These are facts, not opinions.</p>
-                    <p><strong>The fight:</strong> "I'm going to beat this" is willfulness dressed up as determination. The crash-and-push cycle is the cost. He's treating acceptance as giving up when it's actually the prerequisite for managing the condition.</p>
-                    <p><strong>The turn:</strong> "I have chronic pain right now. Using the adaptive equipment doesn't mean I've lost. It means I'm working with my reality instead of against it." This is the hardest kind of turn because it involves accepting something about the self. Turning the mind toward an identity shift, from someone who fights through pain to someone who manages it, is one of the deepest applications of this skill.</p>
+                    <p><strong>Step A (Observe):</strong> Signs of non-acceptance are everywhere: the rescuing behavior (bailing him out), the magical thinking (the right conversation will fix it), the loss of sleep, the cover stories. His body is probably showing it too: chronic tension, exhaustion, hypervigilance around his phone.</p>
+                    <p><strong>Step B (Commit):</strong> "My son is in active addiction right now. I cannot control his choices. I'm going to practice accepting that." This doesn't mean abandoning his son. It means stopping the behaviors driven by the refusal to accept what's happening.</p>
+                    <p><strong>Step C (Repeat):</strong> He will need to make this commitment again every time his son calls in crisis. Every time. For as long as the addiction is active. That's not a failure of the skill. That's the skill meeting one of the hardest realities a parent can face. Each turn is courage, not repetition.</p>
                 </div>
                 <div class="reveal-btn-row">
                     <button class="reveal-btn" onclick="revealScenario('s3', this)">Show response</button>
@@ -1036,14 +1060,14 @@
 
             <div class="scenario-card">
                 <div class="scenario-body">
-                    <div class="scenario-tag accept">Radical acceptance</div>
-                    <p class="scenario-text">A woman's partner of twelve years ended their relationship. It's been four months. She says she's "fine" and has "moved on," but she checks his social media multiple times a day, brings him up in every conversation, and has kept all his things exactly where they were.</p>
-                    <div class="scenario-prompt">Has she accepted the reality? What would actual turning the mind look like?</div>
+                    <div class="scenario-tag observe">Body skills</div>
+                    <p class="scenario-text">A woman in the group has been clenching her jaw so hard she cracked a tooth. She grinds her teeth at night. During check-in she described her non-acceptance with her arms crossed tight against her chest and her voice getting louder with every sentence.</p>
+                    <div class="scenario-prompt">How would you introduce half-smiling and willing hands to this person?</div>
                 </div>
                 <div class="scenario-reveal" id="s4">
-                    <p><strong>The truth:</strong> She's performing acceptance without doing it. The words say "moved on." The behavior says "refusing to let go." This is common and understandable. The mind turns away from grief by pretending it's already on the other side.</p>
-                    <p><strong>The real turn:</strong> would involve acknowledging that the relationship is over, feeling the grief rather than bypassing it, and beginning to reorganize her life around that reality. Moving his things. Stopping the social media checks, or at least naming them as non-acceptance when they happen. Each of those is a micro-turn.</p>
-                    <p>The fact that she needs to do this in stages is normal. Turning the mind toward the end of a twelve-year relationship might be something she does a hundred times a day for months. That's the skill working, not failing.</p>
+                    <p><strong>The body is speaking clearly here.</strong> The jaw clenching, the tooth damage, the crossed arms, the escalating volume: her body is in a posture of fighting. She may or may not be aware of it.</p>
+                    <p><strong>Introduction:</strong> Name what you see without judgment. "I notice your arms are crossed and your jaw looks tight. Can I invite you to try something?" Then guide her through unclenching her hands, turning palms up, relaxing her jaw, and letting the faintest softness come into her face. Don't ask her to smile. Ask her to let go of the tension.</p>
+                    <p><strong>The connection:</strong> "Your body has been fighting this reality 24 hours a day. Even while you sleep. The cracked tooth is the cost. What we're practicing is teaching your body that the fight can pause. Not that the reality is okay. Just that the fight can pause."</p>
                 </div>
                 <div class="reveal-btn-row">
                     <button class="reveal-btn" onclick="revealScenario('s4', this)">Show response</button>
@@ -1053,7 +1077,7 @@
         </div>
 
         <div class="page-nav">
-            <button onclick="showPage(3)">&#8592; Willingness</button>
+            <button onclick="showPage(3)">&#8592; Body Skills</button>
             <button onclick="showPage(5)">Discussion &#8594;</button>
         </div>
     </div>
@@ -1068,30 +1092,30 @@
 
         <div class="questions">
             <div class="question">
-                <div class="question-label">The hardest part</div>
-                <div class="question-text">What is the hardest thing for you about the idea of radical acceptance? What part of you pushes back, and what is it protecting?</div>
-                <div class="question-note">Resistance to acceptance usually has a function. Name it without judging it.</div>
+                <div class="question-label">The function of the fight</div>
+                <div class="question-text">What does non-acceptance do for you? What does it protect you from feeling? Is it still worth the cost?</div>
+                <div class="question-note">Non-acceptance usually buffers against grief, maintains a sense of control, or feels like justice. Name the function.</div>
             </div>
             <div class="question">
-                <div class="question-label">The fork</div>
-                <div class="question-text">Think about the thing you named in the check-in, the reality you're fighting. If you turned toward acceptance right now, even just a half-turn, what would change? What would you lose? What might you gain?</div>
-                <div class="question-note">Most people know the answer. It's the willingness to say it out loud that matters.</div>
-            </div>
-            <div class="question">
-                <div class="question-label">Willfulness</div>
-                <div class="question-text">Where in your life are you being willful right now? Where are you refusing to do what works because you feel like you shouldn't have to?</div>
-                <div class="question-note">"I shouldn't have to" is the most honest answer. Follow it to the cost.</div>
+                <div class="question-label">The commitment</div>
+                <div class="question-text">What's the difference between committing to accept and actually feeling acceptance? Can you make the commitment right now even if the feeling isn't there?</div>
+                <div class="question-note">This is the core of the skill. The commitment is a decision. The feeling follows later, if it comes at all.</div>
             </div>
             <div class="question">
                 <div class="question-label">The body</div>
-                <div class="question-text">When you think about the thing you're fighting, where does your body hold the fight? Jaw, chest, shoulders, stomach? What happens when you try to release it physically?</div>
-                <div class="question-note">This is experiential. Pause and actually do it before answering.</div>
+                <div class="question-text">Where does your body hold non-acceptance? What happened when we tried half-smiling and willing hands? Did anything shift, even slightly?</div>
+                <div class="question-note">Even a small shift is meaningful. The body often moves before the mind is ready.</div>
+            </div>
+            <div class="question">
+                <div class="question-label">Repetition</div>
+                <div class="question-text">How does it change things to think of each turn back toward acceptance as a success rather than evidence that the skill isn't working?</div>
+                <div class="question-note">This reframe is often the most important takeaway from the session.</div>
             </div>
         </div>
 
         <div class="callout cool">
             <div class="callout-label">Facilitator note</div>
-            <p>This discussion can go deep fast. Hold space for grief. Turning the mind toward painful realities often opens up the emotions that non-acceptance was keeping at bay. That's therapeutic, but it needs containment. If someone breaks open, validate the courage of the turn rather than rushing to comfort.</p>
+            <p>The discussion can go deep here. Turning the mind toward painful realities often opens up the emotions that non-acceptance was keeping at bay. That's therapeutic, but it needs containment. If someone breaks open, validate the courage of the turn rather than rushing to comfort. "That's what turning the mind looks like. That's the pain underneath the fight."</p>
         </div>
 
         <div class="page-nav">
@@ -1108,24 +1132,24 @@
         <h2><span class="timing">5 to 8 min</span>Taking it with you</h2>
 
         <h3>This week's practice</h3>
-        <p class="body-text">Pick one practice to carry with you this week.</p>
+        <p class="body-text">Pick one to carry with you.</p>
 
         <div class="options-grid">
             <div class="option" onclick="selectOption(this)">
-                <div class="option-label">Notice the fight</div>
-                <div class="option-desc">Catch yourself fighting reality at least once a day. Just notice. Don't force acceptance yet.</div>
+                <div class="option-label">Catch the signs</div>
+                <div class="option-desc">Practice Step A: notice non-acceptance at least once a day. Just observe. Label it.</div>
             </div>
             <div class="option" onclick="selectOption(this)">
-                <div class="option-label">Practice the turn</div>
-                <div class="option-desc">Pick one specific reality you're resisting and practice turning toward it. Expect to turn away. Turn back.</div>
+                <div class="option-label">Make the commitment</div>
+                <div class="option-desc">Pick one specific reality and practice saying "I'm going to practice accepting this."</div>
             </div>
             <div class="option" onclick="selectOption(this)">
-                <div class="option-label">Body check</div>
-                <div class="option-desc">Three times a day, check where your body is holding non-acceptance. Unclench. Open your hands. Breathe.</div>
+                <div class="option-label">Half-smile + willing hands</div>
+                <div class="option-desc">Practice the body skills three times a day in low-stress moments. Build the pathway.</div>
             </div>
             <div class="option" onclick="selectOption(this)">
-                <div class="option-label">Name the willfulness</div>
-                <div class="option-desc">When you notice "I shouldn't have to," pause and ask: "What would willingness look like here?"</div>
+                <div class="option-label">Count the turns</div>
+                <div class="option-desc">Keep a tally of how many times you turn back toward acceptance in a day. Each one counts.</div>
             </div>
         </div>
 
@@ -1134,7 +1158,7 @@
         <div class="section-label">Checkout</div>
         <h2>One sentence</h2>
         <p class="body-text">
-            Complete this sentence: "The reality I'm going to practice turning toward this week is ___."
+            Complete this sentence: <strong>"The reality I'm going to practice turning toward this week is ___."</strong>
         </p>
         <p class="body-text">
             It doesn't have to be the biggest thing. Start where you can actually practice.
@@ -1142,7 +1166,7 @@
 
         <div class="callout cool">
             <div class="callout-label">Facilitator note</div>
-            <p>Normalize that this is hard. Turning the mind toward painful reality is one of the most courageous things a person can do. If someone is tearful during checkout, that's the skill in action, not a sign that something went wrong. Name it: "That's what turning the mind looks like."</p>
+            <p>Normalize that this is hard. Emphasize: if you turn toward acceptance fifty times this week and turn away forty-nine, that's fifty successful uses of the skill. The practice is the turning, not the staying.</p>
         </div>
 
         <div class="footer">
@@ -1170,13 +1194,19 @@
         header.parentElement.classList.toggle('open');
     }
 
-    function toggleTurnStep(step) {
+    function toggleCoreStep(step) {
         const wasActive = step.classList.contains('active');
-        step.parentElement.querySelectorAll('.turn-step').forEach(s => s.classList.remove('active'));
+        step.parentElement.querySelectorAll('.core-step').forEach(s => s.classList.remove('active'));
         if (!wasActive) step.classList.add('active');
     }
 
-    function selectFork(el, type) {
+    function toggleBodyCard(card) {
+        const wasActive = card.classList.contains('active');
+        card.parentElement.querySelectorAll('.body-card').forEach(c => c.classList.remove('active'));
+        if (!wasActive) card.classList.add('active');
+    }
+
+    function selectFork(el) {
         el.parentElement.querySelectorAll('.fork-path').forEach(p => p.classList.remove('selected'));
         el.classList.add('selected');
     }
