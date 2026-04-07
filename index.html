@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Turning the Mind — Distress Tolerance</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --text:       #1C1917;
+            --text-2:     #57534E;
+            --text-3:     #A8A29E;
+            --accent:     #5B6A8A;
+            --accent-bg:  #ECEEF4;
+            --cool:       #8A6B4F;
+            --cool-bg:    #F3EDE6;
+            --border:     #E7E5E4;
+            --bg:         #FAFAF7;
+            --surface:    #FFFFFF;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.75;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body::before {
+            content: '';
+            display: block;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent) 0%, var(--cool) 100%);
+        }
+
+        .container {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem 4rem;
+        }
+
+        /* ---- Header ---- */
+        .header { margin-bottom: 2.5rem; }
+        .header-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 0.75rem;
+        }
+        h1 {
+            font-size: 2.4rem;
+            font-weight: 700;
+            line-height: 1.15;
+            color: var(--text);
+            letter-spacing: -0.02em;
+            margin-bottom: 0.5rem;
+        }
+        .subtitle {
+            font-size: 1.05rem;
+            color: var(--text-2);
+            font-weight: 400;
+        }
+
+        /* ---- Nav ---- */
+        .nav {
+            display: flex;
+            gap: 0.25rem;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 2.5rem;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        .nav button {
+            background: none;
+            border: none;
+            border-bottom: 2px solid transparent;
+            padding: 0.75rem 1rem;
+            font-family: inherit;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--text-3);
+            cursor: pointer;
+            white-space: nowrap;
+            transition: color 0.15s, border-color 0.15s;
+        }
+        .nav button:hover { color: var(--text-2); }
+        .nav button.active {
+            color: var(--accent);
+            font-weight: 600;
+            border-bottom-color: var(--accent);
+        }
+
+        /* ---- Pages ---- */
+        .page { display: none; }
+        .page.active { display: block; animation: appear 0.25s ease; }
+        @keyframes appear { from { opacity: 0; } to { opacity: 1; } }
+
+        /* ---- Typography ---- */
+        .section-label {
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-3);
+            margin-bottom: 0.5rem;
+        }
+        .section-label.warm { color: var(--accent); }
+        .section-label.cool { color: var(--cool); }
+
+        h2 {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: var(--text);
+            letter-spacing: -0.01em;
+            margin-bottom: 0.75rem;
+        }
+        h3 {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 0.5rem;
+        }
+        .body-text {
+            font-size: 0.95rem;
+            color: var(--text-2);
+            line-height: 1.8;
+        }
+        .body-text + .body-text { margin-top: 0.75rem; }
+        .body-text strong { color: var(--text); font-weight: 600; }
+
+        .timing {
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--text-3);
+            float: right;
+            margin-top: 0.2rem;
+        }
+
+        .divider {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 2.5rem 0;
+        }
+
+        /* ---- Callout ---- */
+        .callout {
+            border-left: 3px solid var(--border);
+            padding: 1rem 1.25rem;
+            margin: 1.5rem 0;
+        }
+        .callout.warm { border-left-color: var(--accent); background: var(--accent-bg); }
+        .callout.cool { border-left-color: var(--cool); background: var(--cool-bg); }
+        .callout .callout-label {
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-3);
+            margin-bottom: 0.4rem;
+        }
+        .callout.warm .callout-label { color: var(--accent); }
+        .callout.cool .callout-label { color: var(--cool); }
+        .callout p { font-size: 0.9rem; color: var(--text-2); line-height: 1.7; }
+        .callout p strong { color: var(--text); }
+
+        /* ---- Steps ---- */
+        .steps { margin: 1.5rem 0; }
+        .step {
+            display: flex;
+            gap: 1rem;
+            align-items: baseline;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .step:last-child { border-bottom: none; }
+        .step-num {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--text-3);
+            flex-shrink: 0;
+            width: 1.5rem;
+            text-align: right;
+        }
+        .step-content { flex: 1; }
+        .step-q { font-size: 0.95rem; font-weight: 600; color: var(--text); }
+        .step-hint { font-size: 0.82rem; color: var(--text-3); margin-top: 0.15rem; line-height: 1.6; }
+
+        /* ---- Accordion ---- */
+        .accordion { margin: 1.5rem 0; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+        .acc-item { border-bottom: 1px solid var(--border); }
+        .acc-item:last-child { border-bottom: none; }
+        .acc-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 1.25rem;
+            cursor: pointer;
+            background: var(--surface);
+            transition: background 0.15s;
+            user-select: none;
+        }
+        .acc-header:hover { background: var(--bg); }
+        .acc-title { font-size: 0.95rem; font-weight: 600; color: var(--text); }
+        .acc-icon { font-size: 1.1rem; color: var(--text-3); transition: transform 0.2s; font-weight: 300; line-height: 1; }
+        .acc-item.open .acc-icon { transform: rotate(45deg); }
+        .acc-body { display: none; padding: 0 1.25rem 1.25rem; background: var(--surface); }
+        .acc-item.open .acc-body { display: block; }
+        .acc-body p { font-size: 0.9rem; color: var(--text-2); line-height: 1.75; }
+        .acc-body p + p { margin-top: 0.75rem; }
+        .acc-body ul { list-style: none; margin-top: 0.5rem; }
+        .acc-body ul li {
+            font-size: 0.9rem;
+            color: var(--text-2);
+            line-height: 1.75;
+            padding-left: 1rem;
+            position: relative;
+        }
+        .acc-body ul li::before {
+            content: '\00B7';
+            position: absolute;
+            left: 0;
+            color: var(--text-3);
+        }
+        .acc-body .aside {
+            margin-top: 0.75rem;
+            font-size: 0.85rem;
+            font-style: italic;
+            color: var(--text-3);
+            padding-left: 1rem;
+            border-left: 2px solid var(--border);
+        }
+
+        /* ---- Fork visualization ---- */
+        .fork-container { margin: 1.5rem 0; }
+        .fork-prompt {
+            text-align: center;
+            padding: 1.25rem;
+            border: 1px solid var(--border);
+            border-radius: 8px 8px 0 0;
+            background: var(--surface);
+        }
+        .fork-prompt-label {
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-3);
+            margin-bottom: 0.4rem;
+        }
+        .fork-prompt-text {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text);
+            line-height: 1.6;
+        }
+        .fork-stem {
+            width: 2px;
+            height: 1.5rem;
+            background: var(--border);
+            margin: 0 auto;
+        }
+        .fork-paths {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+        }
+        .fork-path {
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: border-color 0.2s, transform 0.15s;
+        }
+        .fork-path:hover { transform: translateY(-2px); }
+        .fork-path.accept { border-color: var(--accent); }
+        .fork-path.reject { border-color: var(--cool); }
+        .fork-path.selected { transform: translateY(-2px); }
+        .fork-path.accept.selected { background: var(--accent-bg); box-shadow: 0 2px 12px rgba(91, 106, 138, 0.15); }
+        .fork-path.reject.selected { background: var(--cool-bg); box-shadow: 0 2px 12px rgba(138, 107, 79, 0.15); }
+        .fork-path-header {
+            padding: 1rem 1.25rem 0.75rem;
+            text-align: center;
+        }
+        .fork-path-dir {
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 0.25rem;
+        }
+        .fork-path.accept .fork-path-dir { color: var(--accent); }
+        .fork-path.reject .fork-path-dir { color: var(--cool); }
+        .fork-path-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text);
+        }
+        .fork-path-body {
+            padding: 0 1.25rem 1.25rem;
+        }
+        .fork-path-body p {
+            font-size: 0.85rem;
+            color: var(--text-2);
+            line-height: 1.7;
+        }
+        .fork-path-body ul {
+            list-style: none;
+            margin-top: 0.5rem;
+        }
+        .fork-path-body ul li {
+            font-size: 0.85rem;
+            color: var(--text-2);
+            line-height: 1.75;
+            padding-left: 1rem;
+            position: relative;
+        }
+        .fork-path-body ul li::before {
+            content: '\00B7';
+            position: absolute;
+            left: 0;
+            color: var(--text-3);
+        }
+        .fork-outcome {
+            display: none;
+            padding: 1rem 1.25rem;
+            border-top: 1px solid var(--border);
+            font-size: 0.85rem;
+            color: var(--text-2);
+            line-height: 1.7;
+        }
+        .fork-path.selected .fork-outcome { display: block; }
+        .fork-path.accept .fork-outcome { background: var(--accent-bg); }
+        .fork-path.reject .fork-outcome { background: var(--cool-bg); }
+
+        /* ---- Turning steps (the skill itself) ---- */
+        .turn-steps { margin: 1.5rem 0; }
+        .turn-step {
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 0.75rem;
+            cursor: pointer;
+            transition: border-color 0.15s;
+        }
+        .turn-step:hover { border-color: var(--accent); }
+        .turn-step.active { border-color: var(--accent); }
+        .turn-step-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 1.25rem;
+            background: var(--surface);
+        }
+        .turn-step-num {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--accent);
+            width: 2rem;
+            flex-shrink: 0;
+            text-align: center;
+        }
+        .turn-step-name {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+        .turn-step-detail {
+            display: none;
+            padding: 1.25rem;
+            background: var(--bg);
+            border-top: 1px solid var(--border);
+        }
+        .turn-step.active .turn-step-detail { display: block; }
+        .turn-step-detail p { font-size: 0.9rem; color: var(--text-2); line-height: 1.75; }
+        .turn-step-detail p + p { margin-top: 0.75rem; }
+        .turn-step-detail .aside {
+            margin-top: 0.75rem;
+            font-size: 0.85rem;
+            font-style: italic;
+            color: var(--text-3);
+            padding-left: 1rem;
+            border-left: 2px solid var(--border);
+        }
+
+        /* ---- Willingness comparison ---- */
+        .compare-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 1.5rem 0;
+        }
+        .compare-col {
+            padding: 1.5rem 1.25rem;
+        }
+        .compare-col.willing { background: var(--accent-bg); border-right: 1px solid var(--border); }
+        .compare-col.willful { background: var(--cool-bg); }
+        .compare-col-label {
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 0.75rem;
+        }
+        .compare-col.willing .compare-col-label { color: var(--accent); }
+        .compare-col.willful .compare-col-label { color: var(--cool); }
+        .compare-col-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 0.75rem;
+        }
+        .compare-col ul { list-style: none; }
+        .compare-col ul li {
+            font-size: 0.85rem;
+            color: var(--text-2);
+            line-height: 1.75;
+            padding-left: 1rem;
+            position: relative;
+        }
+        .compare-col ul li::before {
+            content: '\00B7';
+            position: absolute;
+            left: 0;
+            color: var(--text-3);
+        }
+
+        /* ---- Scenario cards ---- */
+        .scenario-stack { margin: 1.5rem 0; }
+        .scenario-card {
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 0.75rem;
+        }
+        .scenario-body {
+            padding: 1.5rem 1.5rem 1.25rem;
+            background: var(--surface);
+        }
+        .scenario-tag {
+            display: inline-block;
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 0.2rem 0.5rem;
+            border-radius: 3px;
+            margin-bottom: 0.75rem;
+        }
+        .scenario-tag.accept { color: var(--accent); background: var(--accent-bg); }
+        .scenario-tag.turning { color: var(--cool); background: var(--cool-bg); }
+        .scenario-text {
+            font-size: 0.95rem;
+            color: var(--text);
+            line-height: 1.8;
+        }
+        .scenario-prompt {
+            margin-top: 0.75rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--accent);
+        }
+        .scenario-reveal {
+            display: none;
+            padding: 1.25rem;
+            border-top: 1px solid var(--border);
+            background: var(--bg);
+        }
+        .scenario-reveal.show { display: block; }
+        .scenario-reveal p { font-size: 0.9rem; color: var(--text-2); line-height: 1.75; }
+        .scenario-reveal p + p { margin-top: 0.75rem; }
+        .reveal-btn-row {
+            border-top: 1px solid var(--border);
+            text-align: center;
+        }
+        .reveal-btn {
+            width: 100%;
+            padding: 0.9rem;
+            border: none;
+            font-family: inherit;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            background: var(--surface);
+            color: var(--text-3);
+            transition: background 0.15s, color 0.15s;
+        }
+        .reveal-btn:hover { background: var(--bg); color: var(--text-2); }
+        .reveal-btn.revealed { color: var(--accent); background: var(--accent-bg); cursor: default; }
+
+        /* ---- Discussion ---- */
+        .questions { margin: 1.5rem 0; }
+        .question { padding: 1rem 0; border-bottom: 1px solid var(--border); }
+        .question:last-child { border-bottom: none; }
+        .question-label { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-3); margin-bottom: 0.3rem; }
+        .question-text { font-size: 0.95rem; font-weight: 500; color: var(--text); line-height: 1.7; }
+        .question-note { font-size: 0.82rem; font-style: italic; color: var(--text-3); margin-top: 0.3rem; }
+
+        /* ---- Options grid ---- */
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1px;
+            background: var(--border);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 1.5rem 0;
+        }
+        .option {
+            background: var(--surface);
+            padding: 1.25rem;
+            cursor: pointer;
+            transition: background 0.15s;
+        }
+        .option:hover { background: var(--bg); }
+        .option.selected { background: var(--accent-bg); }
+        .option-label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 0.2rem;
+        }
+        .option-desc {
+            font-size: 0.8rem;
+            color: var(--text-3);
+            line-height: 1.5;
+        }
+
+        /* ---- Page nav ---- */
+        .page-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border);
+        }
+        .page-nav button {
+            background: none; border: none; font-family: inherit;
+            font-size: 0.9rem; font-weight: 500; color: var(--accent);
+            cursor: pointer; padding: 0.5rem 0; transition: opacity 0.15s;
+        }
+        .page-nav button:hover { opacity: 0.7; }
+        .page-nav .ghost { visibility: hidden; }
+
+        /* ---- Footer ---- */
+        .footer {
+            margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--border);
+            text-align: center; font-size: 0.8rem; color: var(--text-3); line-height: 1.8;
+        }
+        .footer strong { color: var(--text-2); font-weight: 600; }
+
+        /* ---- Responsive ---- */
+        @media (max-width: 600px) {
+            .container { padding: 2rem 1.25rem 3rem; }
+            h1 { font-size: 1.8rem; }
+            .fork-paths { grid-template-columns: 1fr; }
+            .compare-grid { grid-template-columns: 1fr; }
+            .compare-col.willing { border-right: none; border-bottom: 1px solid var(--border); }
+            .options-grid { grid-template-columns: 1fr; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <header class="header">
+        <div class="header-label">DBT Skills &mdash; Adult Group</div>
+        <h1>Turning the Mind</h1>
+        <p class="subtitle">The repeated choice to stop fighting what is already true</p>
+    </header>
+
+    <nav class="nav">
+        <button class="active" onclick="showPage(0, this)">Welcome</button>
+        <button onclick="showPage(1, this)">Acceptance</button>
+        <button onclick="showPage(2, this)">The Turn</button>
+        <button onclick="showPage(3, this)">Willingness</button>
+        <button onclick="showPage(4, this)">Practice</button>
+        <button onclick="showPage(5, this)">Discussion</button>
+        <button onclick="showPage(6, this)">Closing</button>
+    </nav>
+
+
+    <!-- ======================== WELCOME ======================== -->
+    <div class="page active">
+
+        <div class="section-label warm">Welcome</div>
+        <h2><span class="timing">8 to 10 min</span>About today</h2>
+        <p class="body-text">
+            Today we're working with one of the hardest skills in DBT. Not the most complicated.
+            The hardest. Because this skill asks you to do the thing your brain is specifically
+            designed not to do: <strong>stop fighting reality</strong>.
+        </p>
+        <p class="body-text">
+            Turning the Mind is the skill that sits between knowing you need to accept something
+            and actually doing it. It's the moment at the fork in the road where you choose, again,
+            to walk toward acceptance instead of away from it. And then you choose again. And again.
+            Because acceptance isn't a destination. It's a direction you keep turning toward.
+        </p>
+        <p class="body-text">
+            We'll start with what radical acceptance actually means, then learn the turning mechanism itself,
+            and finish with the difference between willingness and willfulness.
+        </p>
+
+        <div class="callout warm">
+            <div class="callout-label">Confidentiality</div>
+            <p>What's shared here stays here. Names, stories, details, all of it is protected. The only exception is safety.</p>
+        </div>
+
+        <div class="callout">
+            <p><strong>You can pass at any point.</strong> This session touches on painful realities. If something is too close right now, say "pass" and we move on. No explanation needed.</p>
+        </div>
+
+        <hr class="divider">
+
+        <div class="section-label">Check-in</div>
+        <h2><span class="timing">10 to 12 min</span>Bridge questions</h2>
+        <p class="body-text">Share your name, then take these one at a time.</p>
+
+        <div class="steps">
+            <div class="step">
+                <div class="step-num">1</div>
+                <div class="step-content">
+                    <div class="step-q">What's something in your life right now that you're fighting against? Something that is the way it is whether you like it or not.</div>
+                    <div class="step-hint">Could be big or small. A situation, a person, a fact about yourself. Whatever comes up first.</div>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-num">2</div>
+                <div class="step-content">
+                    <div class="step-q">What does the fighting look like for you? Ruminating, arguing in your head, trying to control things, refusing to think about it?</div>
+                    <div class="step-hint">Everyone fights reality differently. Name your version.</div>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-num">3</div>
+                <div class="step-content">
+                    <div class="step-q">Has the fighting changed the thing you're fighting? Or has it mostly just cost you something?</div>
+                    <div class="step-hint">This is not a trick question. Sometimes fighting works. But often the cost is the only thing that's moved.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-nav">
+            <button class="ghost">&#8592; Back</button>
+            <button onclick="showPage(1)">Acceptance &#8594;</button>
+        </div>
+    </div>
+
+
+    <!-- ======================== ACCEPTANCE ======================== -->
+    <div class="page">
+
+        <div class="section-label warm">The foundation</div>
+        <h2><span class="timing">12 to 15 min</span>What radical acceptance actually means</h2>
+        <p class="body-text">
+            Before we can talk about turning the mind, we need to be precise about what
+            we're turning toward. Radical acceptance is the most misunderstood concept in DBT.
+            People hear "acceptance" and think it means giving up, approving, or rolling over.
+            It doesn't mean any of those things.
+        </p>
+
+        <div class="accordion">
+            <div class="acc-item open">
+                <div class="acc-header" onclick="toggleAcc(this)">
+                    <div class="acc-title">What radical acceptance is</div>
+                    <div class="acc-icon">+</div>
+                </div>
+                <div class="acc-body">
+                    <p>Radical acceptance means acknowledging reality as it is, completely and without reservation, in this moment. The word "radical" means all the way through. Complete. Down to the root.</p>
+                    <p>It means letting go of the argument with the way things are. Not the argument about what should happen next, but the argument about what has already happened or what is already true. That argument is over. Reality won.</p>
+                    <ul>
+                        <li><strong>Pain is part of life.</strong> It cannot be avoided entirely. Trying to avoid all pain creates suffering.</li>
+                        <li><strong>Suffering = pain + non-acceptance.</strong> The pain is the thing that happened. The suffering is the refusal to let it be what it is.</li>
+                        <li><strong>The past is the past.</strong> Every event that has already occurred has causes. It couldn't have been different given all the factors in play. That doesn't make it okay. It makes it real.</li>
+                    </ul>
+                    <div class="aside">"It is what it is" can be the most dismissive or the most profound sentence in the language. The difference is whether you mean it.</div>
+                </div>
+            </div>
+
+            <div class="acc-item">
+                <div class="acc-header" onclick="toggleAcc(this)">
+                    <div class="acc-title">What radical acceptance is not</div>
+                    <div class="acc-icon">+</div>
+                </div>
+                <div class="acc-body">
+                    <p>This is where most people get stuck, so this part matters.</p>
+                    <ul>
+                        <li><strong>Not approval.</strong> Accepting that something happened does not mean you think it was okay. You can fully accept that someone hurt you and still believe it was wrong.</li>
+                        <li><strong>Not passivity.</strong> Acceptance is about the past and present. It says nothing about what you do next. You can accept the current situation completely and still work to change it.</li>
+                        <li><strong>Not forgiveness.</strong> Acceptance and forgiveness are different processes. Acceptance doesn't require you to forgive. It requires you to stop arguing with the fact that it happened.</li>
+                        <li><strong>Not a feeling.</strong> Acceptance is a decision, not a feeling. You don't have to feel accepting. You have to choose it.</li>
+                        <li><strong>Not a one-time event.</strong> This is the key to today's session. Acceptance isn't something you achieve and then have forever. It's something you choose, lose, and choose again.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="acc-item">
+                <div class="acc-header" onclick="toggleAcc(this)">
+                    <div class="acc-title">Why the brain fights acceptance</div>
+                    <div class="acc-icon">+</div>
+                </div>
+                <div class="acc-body">
+                    <p>Your brain is a problem-solving machine. When something is wrong, it activates to fix it. That's adaptive when the problem is solvable. But some problems aren't solvable. They're facts.</p>
+                    <p>When you can't fix reality, the brain doesn't just stop. It keeps running the same loop: this shouldn't be this way, if only, why did this happen, it's not fair. The loop feels productive. It isn't. It's just the brain doing the only thing it knows how to do with an unsolvable problem.</p>
+                    <p>Non-acceptance also serves a function. As long as you're fighting reality, you don't have to feel the full weight of it. The fight is a buffer against grief. That's why people hold onto it. Letting go of the fight means feeling the pain without anything between you and it.</p>
+                    <div class="aside">The fight against reality is exhausting, but it's familiar. Acceptance is simpler, but it requires you to feel what you've been avoiding.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="callout cool">
+            <div class="callout-label">Facilitator note</div>
+            <p>Expect resistance here. "So I just accept that they abused me?" is the most common pushback. Meet it directly: acceptance does not mean it was okay. It means it happened. The alternative is spending the rest of your life arguing with a fact, and that argument has a cost. Name the cost.</p>
+        </div>
+
+        <div class="page-nav">
+            <button onclick="showPage(0)">&#8592; Welcome</button>
+            <button onclick="showPage(2)">The Turn &#8594;</button>
+        </div>
+    </div>
+
+
+    <!-- ======================== THE TURN ======================== -->
+    <div class="page">
+
+        <div class="section-label warm">The skill</div>
+        <h2><span class="timing">15 to 18 min</span>Turning the Mind</h2>
+        <p class="body-text">
+            Here's the problem with radical acceptance: even when you choose it, it doesn't stick.
+            You accept something at 9am and by 9:15 you're fighting it again. That's not failure.
+            That's how minds work. <strong>Turning the Mind</strong> is the skill for this exact problem.
+        </p>
+        <p class="body-text">
+            Think of it as standing at a fork in the road. One path leads toward acceptance. The other
+            leads toward rejection, bitterness, and the ongoing fight with reality. Every time you notice
+            you've drifted down the rejection path, you turn around and walk back to the fork. Then you
+            choose acceptance again.
+        </p>
+
+        <div class="fork-container">
+            <div class="fork-prompt">
+                <div class="fork-prompt-label">The fork</div>
+                <div class="fork-prompt-text">Something painful has happened that you cannot change. You are standing at the fork. Click a path.</div>
+            </div>
+            <div class="fork-stem"></div>
+            <div class="fork-paths">
+                <div class="fork-path accept" onclick="selectFork(this, 'accept')">
+                    <div class="fork-path-header">
+                        <div class="fork-path-dir">Turn toward</div>
+                        <div class="fork-path-title">Acceptance</div>
+                    </div>
+                    <div class="fork-path-body">
+                        <ul>
+                            <li>Acknowledge reality without fighting it</li>
+                            <li>Let yourself feel the pain without adding the struggle</li>
+                            <li>Open yourself to what comes next</li>
+                            <li>Free up energy that was going to the fight</li>
+                        </ul>
+                    </div>
+                    <div class="fork-outcome">
+                        <strong>What happens down this path:</strong> The pain is still there. It might even feel sharper at first because you're not buffering it with anger or denial. But the suffering, the layer on top of the pain, starts to decrease. Energy comes back. You can think about what to do next instead of being stuck in what already happened.
+                    </div>
+                </div>
+                <div class="fork-path reject" onclick="selectFork(this, 'reject')">
+                    <div class="fork-path-header">
+                        <div class="fork-path-dir">Turn away</div>
+                        <div class="fork-path-title">Rejection</div>
+                    </div>
+                    <div class="fork-path-body">
+                        <ul>
+                            <li>Argue with the fact that it happened</li>
+                            <li>Replay how it should have gone differently</li>
+                            <li>Refuse to let go of the injustice</li>
+                            <li>Stay locked in the fight</li>
+                        </ul>
+                    </div>
+                    <div class="fork-outcome">
+                        <strong>What happens down this path:</strong> The pain stays exactly the same, because rejecting reality doesn't change it. But suffering piles on top. Bitterness, exhaustion, rage, helplessness. The fight consumes energy that could go to anything else. The past takes up more and more space in the present.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <hr class="divider">
+
+        <div class="section-label warm">How to do it</div>
+        <h2>The turning process</h2>
+        <p class="body-text">
+            Turning the Mind is not complicated. It's simple and relentless. Click each step.
+        </p>
+
+        <div class="turn-steps">
+            <div class="turn-step active" onclick="toggleTurnStep(this)">
+                <div class="turn-step-header">
+                    <div class="turn-step-num">1</div>
+                    <div class="turn-step-name">Observe that you've turned away</div>
+                </div>
+                <div class="turn-step-detail">
+                    <p>Notice that you're fighting reality. You're ruminating, rehearsing arguments, bargaining with the past, or refusing to acknowledge what's true. This is the most important step because you can't turn toward acceptance if you don't notice you've turned away.</p>
+                    <p>Signs you've turned away: replaying the same thought loop, clenching physically, using words like "should," "shouldn't," "it's not fair," "why me." The feeling is often a combination of anger and exhaustion.</p>
+                    <div class="aside">You're not failing when you notice you've turned away. You're succeeding at step one.</div>
+                </div>
+            </div>
+
+            <div class="turn-step" onclick="toggleTurnStep(this)">
+                <div class="turn-step-header">
+                    <div class="turn-step-num">2</div>
+                    <div class="turn-step-name">Make an inner commitment to accept</div>
+                </div>
+                <div class="turn-step-detail">
+                    <p>Choose acceptance. Deliberately. It's not a feeling. It's a decision. You might say something internally like: "This is what happened. I'm choosing to accept it." or "I'm turning my mind toward acceptance right now."</p>
+                    <p>The commitment doesn't have to be grand or spiritual. It just has to be intentional. You're choosing to stop the fight, for now, in this moment. You're not promising to accept it forever. You're choosing to accept it right now.</p>
+                </div>
+            </div>
+
+            <div class="turn-step" onclick="toggleTurnStep(this)">
+                <div class="turn-step-header">
+                    <div class="turn-step-num">3</div>
+                    <div class="turn-step-name">Do it with your whole self</div>
+                </div>
+                <div class="turn-step-detail">
+                    <p>Acceptance isn't just cognitive. It lives in the body too. When you make the choice, let your body participate. Unclench your hands. Drop your shoulders. Breathe into the tight places. Let your face soften.</p>
+                    <p>Half-acceptance, where you say the words but your body stays braced for the fight, doesn't work. The body holds the rejection even when the mind lets go. Both have to turn.</p>
+                    <div class="aside">Try it right now. Think of something you've been fighting. Say to yourself "I accept this." Notice what your body does in response. That's the data.</div>
+                </div>
+            </div>
+
+            <div class="turn-step" onclick="toggleTurnStep(this)">
+                <div class="turn-step-header">
+                    <div class="turn-step-num">4</div>
+                    <div class="turn-step-name">Expect to turn away again</div>
+                </div>
+                <div class="turn-step-detail">
+                    <p>This is not a sign of failure. This is how the skill works. You will turn away. The mind does this automatically, especially with painful realities. The skill is not "accept once and hold." The skill is "notice you've turned away, and turn back."</p>
+                    <p>Some days you might need to turn back fifty times. That's fifty successful uses of the skill, not fifty failures. The practice is the turning, not the staying.</p>
+                </div>
+            </div>
+
+            <div class="turn-step" onclick="toggleTurnStep(this)">
+                <div class="turn-step-header">
+                    <div class="turn-step-num">5</div>
+                    <div class="turn-step-name">Develop a plan for catching yourself</div>
+                </div>
+                <div class="turn-step-detail">
+                    <p>Build awareness of your personal signs of non-acceptance. For some people it's a thought pattern. For others it's a physical sensation. For others it's a behavior, like checking their phone, or picking a fight, or numbing out.</p>
+                    <p>Once you know your signs, you can set up internal checkpoints. "When I notice I'm rehearsing that conversation again, that's my cue to turn." The more specific the cue, the faster the catch.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="callout warm">
+            <div class="callout-label">The key insight</div>
+            <p>Turning the Mind is not a one-time event. It's a <strong>practice</strong>. Every time you turn back toward acceptance, you're building the neural pathway that makes the next turn easier. The first hundred turns are the hardest. It gets easier not because reality changes, but because you do.</p>
+        </div>
+
+        <div class="page-nav">
+            <button onclick="showPage(1)">&#8592; Acceptance</button>
+            <button onclick="showPage(3)">Willingness &#8594;</button>
+        </div>
+    </div>
+
+
+    <!-- ======================== WILLINGNESS ======================== -->
+    <div class="page">
+
+        <div class="section-label cool">The stance</div>
+        <h2><span class="timing">10 to 12 min</span>Willingness vs. Willfulness</h2>
+        <p class="body-text">
+            Once you've turned toward acceptance, you need a stance for staying there. DBT calls
+            this <strong>willingness</strong>. Its opposite is <strong>willfulness</strong>. The
+            difference between the two is the difference between working with reality and working
+            against it.
+        </p>
+
+        <div class="compare-grid">
+            <div class="compare-col willing">
+                <div class="compare-col-label">Acceptance in action</div>
+                <div class="compare-col-title">Willingness</div>
+                <ul>
+                    <li>Doing what is needed in the moment</li>
+                    <li>Responding to the situation as it actually is</li>
+                    <li>Participating fully even when it's uncomfortable</li>
+                    <li>Listening to your wise mind</li>
+                    <li>Acting on your values even when you don't feel like it</li>
+                    <li>Allowing life to be what it is</li>
+                </ul>
+            </div>
+            <div class="compare-col willful">
+                <div class="compare-col-label">Non-acceptance in action</div>
+                <div class="compare-col-title">Willfulness</div>
+                <ul>
+                    <li>Refusing to do what works because you shouldn't have to</li>
+                    <li>Trying to fix the situation by insisting it be different</li>
+                    <li>Giving up entirely when you can't control the outcome</li>
+                    <li>Acting from spite, stubbornness, or revenge</li>
+                    <li>Sitting on your hands because you're angry at the universe</li>
+                    <li>Demanding that life be fair before you'll participate</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="accordion">
+            <div class="acc-item open">
+                <div class="acc-header" onclick="toggleAcc(this)">
+                    <div class="acc-title">Why willfulness feels justified</div>
+                    <div class="acc-icon">+</div>
+                </div>
+                <div class="acc-body">
+                    <p>Willfulness almost always feels righteous. That's what makes it so sticky. "I shouldn't have to deal with this." "It's not fair." "They should be the one fixing this, not me." Every one of those thoughts might be true. And none of them change the situation.</p>
+                    <p>Willfulness is what happens when you let your assessment of what's fair determine whether you'll engage with what's real. It feels like standing your ground. It functions like standing still while the water rises.</p>
+                    <div class="aside">The most willful sentence in the English language is "I shouldn't have to." It might be true. It's also the most reliable way to stay stuck.</div>
+                </div>
+            </div>
+
+            <div class="acc-item">
+                <div class="acc-header" onclick="toggleAcc(this)">
+                    <div class="acc-title">Both show up as giving up</div>
+                    <div class="acc-icon">+</div>
+                </div>
+                <div class="acc-body">
+                    <p>Willfulness doesn't always look like fighting. Sometimes it looks like collapsing. "Fine. Nothing matters anyway. I'll just give up." That's not acceptance. That's willfulness wearing the costume of surrender. Acceptance is alive and engaged. Willful giving up is a refusal to participate because you can't have what you want.</p>
+                    <p>The test: if you're giving up with bitterness, resentment, or spite, it's willfulness. If you're letting go with openness and readiness for what comes next, it's acceptance.</p>
+                </div>
+            </div>
+
+            <div class="acc-item">
+                <div class="acc-header" onclick="toggleAcc(this)">
+                    <div class="acc-title">How to catch willfulness in the body</div>
+                    <div class="acc-icon">+</div>
+                </div>
+                <div class="acc-body">
+                    <p>Willfulness has a physical signature. Clenched jaw. Crossed arms. Tight chest. The posture of refusal. Willingness has a different one: open hands, relaxed face, soft belly, feet on the ground.</p>
+                    <p>When you're not sure which stance you're in, check your body first. The body often knows before the mind does. If you're physically braced against reality, you're in willfulness no matter what you're telling yourself.</p>
+                    <div class="aside">Try this: unclench your hands right now. Open your palms face-up on your legs. Notice what happens to your emotional state. That small physical shift is a micro-turn toward willingness.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-nav">
+            <button onclick="showPage(2)">&#8592; The Turn</button>
+            <button onclick="showPage(4)">Practice &#8594;</button>
+        </div>
+    </div>
+
+
+    <!-- ======================== PRACTICE ======================== -->
+    <div class="page">
+
+        <div class="section-label warm">Practice</div>
+        <h2><span class="timing">15 to 20 min</span>Finding the turn</h2>
+        <p class="body-text">
+            For each scenario, identify: What reality is being fought? Where is the fork?
+            What would turning the mind look like? Then tap to compare.
+        </p>
+
+        <div class="scenario-stack">
+
+            <div class="scenario-card">
+                <div class="scenario-body">
+                    <div class="scenario-tag accept">Radical acceptance</div>
+                    <p class="scenario-text">A woman was passed over for a promotion she'd been working toward for two years. The job went to someone with less experience. She spends every evening rehearsing what she should have said in the interview, composing emails she'll never send, and telling anyone who will listen that the decision was political.</p>
+                    <div class="scenario-prompt">Where is the fork? What would turning the mind look like?</div>
+                </div>
+                <div class="scenario-reveal" id="s0">
+                    <p><strong>The reality:</strong> She didn't get the promotion. That has already happened and cannot be changed by any amount of rehearsal or righteous anger.</p>
+                    <p><strong>The turn:</strong> "I didn't get the job. That's what happened. The decision may have been unfair and it's still the decision that was made." From there, willingness opens up options: update the resume, have a direct conversation with leadership about her path, decide whether this organization is where she wants to stay. All of those require accepting what happened first. The rumination loop keeps her at the fork, choosing the rejection path over and over.</p>
+                </div>
+                <div class="reveal-btn-row">
+                    <button class="reveal-btn" onclick="revealScenario('s0', this)">Show response</button>
+                </div>
+            </div>
+
+            <div class="scenario-card">
+                <div class="scenario-body">
+                    <div class="scenario-tag turning">Turning the mind</div>
+                    <p class="scenario-text">A man's adult daughter has cut off contact with him. He calls every week and she doesn't answer. He sends gifts that come back unopened. His friends tell him to give her space, but he says he can't just do nothing. "She's my daughter. I can't accept that she doesn't want to talk to me."</p>
+                    <div class="scenario-prompt">What is he refusing to accept? What is the cost of the refusal?</div>
+                </div>
+                <div class="scenario-reveal" id="s1">
+                    <p><strong>The reality he's fighting:</strong> His daughter, right now, does not want contact. That's the fact. Not forever necessarily, but right now.</p>
+                    <p><strong>The cost:</strong> Every unreturned call reinforces his pain and possibly pushes her further away. The inability to sit with the reality is driving the very behavior that may be making it worse. His "I can't accept this" is actually "I refuse to accept this," and the refusal is the willfulness.</p>
+                    <p><strong>The turn:</strong> "My daughter has pulled away. I don't know all her reasons. I can accept this is where we are right now without accepting that it's permanent." Willingness might look like respecting her boundary, doing his own therapeutic work, and being available without pursuing.</p>
+                </div>
+                <div class="reveal-btn-row">
+                    <button class="reveal-btn" onclick="revealScenario('s1', this)">Show response</button>
+                </div>
+            </div>
+
+            <div class="scenario-card">
+                <div class="scenario-body">
+                    <div class="scenario-tag accept">Willingness vs. willfulness</div>
+                    <p class="scenario-text">A group member is in recovery from alcohol use disorder. She's been sober for eight months but says: "I shouldn't have to go to meetings for the rest of my life. Normal people don't have to do this. I should be able to just have a drink like everyone else."</p>
+                    <div class="scenario-prompt">Where is the willfulness? What would willingness look like?</div>
+                </div>
+                <div class="scenario-reveal" id="s2">
+                    <p><strong>The willfulness:</strong> "I shouldn't have to." She's measuring her reality against someone else's and refusing to participate in what works because it doesn't feel fair. Every "should" is a fight with the way things actually are for her.</p>
+                    <p><strong>The turn:</strong> "I have a different relationship with alcohol than some people. That's the reality. Meetings are a tool that works for me." Willingness doesn't mean loving the meetings. It means going because it serves her life, even though she wishes she didn't need to.</p>
+                    <p>Notice that acceptance here doesn't mean giving up hope. It means engaging with her actual situation rather than the one she wishes she had.</p>
+                </div>
+                <div class="reveal-btn-row">
+                    <button class="reveal-btn" onclick="revealScenario('s2', this)">Show response</button>
+                </div>
+            </div>
+
+            <div class="scenario-card">
+                <div class="scenario-body">
+                    <div class="scenario-tag turning">Turning the mind</div>
+                    <p class="scenario-text">A man was diagnosed with a chronic pain condition six months ago. He's tried multiple treatments, none have eliminated the pain. He refuses to use adaptive equipment his doctor recommended, saying "I'm not disabled. I'm going to beat this." He pushes through pain until he's bedridden for days, then the cycle repeats.</p>
+                    <div class="scenario-prompt">What reality is he fighting? What does the turn look like here?</div>
+                </div>
+                <div class="scenario-reveal" id="s3">
+                    <p><strong>The reality:</strong> He has chronic pain. The treatments haven't eliminated it. The condition, as it stands now, requires accommodation. These are facts, not opinions.</p>
+                    <p><strong>The fight:</strong> "I'm going to beat this" is willfulness dressed up as determination. The crash-and-push cycle is the cost. He's treating acceptance as giving up when it's actually the prerequisite for managing the condition.</p>
+                    <p><strong>The turn:</strong> "I have chronic pain right now. Using the adaptive equipment doesn't mean I've lost. It means I'm working with my reality instead of against it." This is the hardest kind of turn because it involves accepting something about the self. Turning the mind toward an identity shift, from someone who fights through pain to someone who manages it, is one of the deepest applications of this skill.</p>
+                </div>
+                <div class="reveal-btn-row">
+                    <button class="reveal-btn" onclick="revealScenario('s3', this)">Show response</button>
+                </div>
+            </div>
+
+            <div class="scenario-card">
+                <div class="scenario-body">
+                    <div class="scenario-tag accept">Radical acceptance</div>
+                    <p class="scenario-text">A woman's partner of twelve years ended their relationship. It's been four months. She says she's "fine" and has "moved on," but she checks his social media multiple times a day, brings him up in every conversation, and has kept all his things exactly where they were.</p>
+                    <div class="scenario-prompt">Has she accepted the reality? What would actual turning the mind look like?</div>
+                </div>
+                <div class="scenario-reveal" id="s4">
+                    <p><strong>The truth:</strong> She's performing acceptance without doing it. The words say "moved on." The behavior says "refusing to let go." This is common and understandable. The mind turns away from grief by pretending it's already on the other side.</p>
+                    <p><strong>The real turn:</strong> would involve acknowledging that the relationship is over, feeling the grief rather than bypassing it, and beginning to reorganize her life around that reality. Moving his things. Stopping the social media checks, or at least naming them as non-acceptance when they happen. Each of those is a micro-turn.</p>
+                    <p>The fact that she needs to do this in stages is normal. Turning the mind toward the end of a twelve-year relationship might be something she does a hundred times a day for months. That's the skill working, not failing.</p>
+                </div>
+                <div class="reveal-btn-row">
+                    <button class="reveal-btn" onclick="revealScenario('s4', this)">Show response</button>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="page-nav">
+            <button onclick="showPage(3)">&#8592; Willingness</button>
+            <button onclick="showPage(5)">Discussion &#8594;</button>
+        </div>
+    </div>
+
+
+    <!-- ======================== DISCUSSION ======================== -->
+    <div class="page">
+
+        <div class="section-label warm">Discussion</div>
+        <h2><span class="timing">10 to 15 min</span>Going deeper</h2>
+        <p class="body-text">Open floor. Take any of these that resonate. Build on what someone else says if something lands.</p>
+
+        <div class="questions">
+            <div class="question">
+                <div class="question-label">The hardest part</div>
+                <div class="question-text">What is the hardest thing for you about the idea of radical acceptance? What part of you pushes back, and what is it protecting?</div>
+                <div class="question-note">Resistance to acceptance usually has a function. Name it without judging it.</div>
+            </div>
+            <div class="question">
+                <div class="question-label">The fork</div>
+                <div class="question-text">Think about the thing you named in the check-in, the reality you're fighting. If you turned toward acceptance right now, even just a half-turn, what would change? What would you lose? What might you gain?</div>
+                <div class="question-note">Most people know the answer. It's the willingness to say it out loud that matters.</div>
+            </div>
+            <div class="question">
+                <div class="question-label">Willfulness</div>
+                <div class="question-text">Where in your life are you being willful right now? Where are you refusing to do what works because you feel like you shouldn't have to?</div>
+                <div class="question-note">"I shouldn't have to" is the most honest answer. Follow it to the cost.</div>
+            </div>
+            <div class="question">
+                <div class="question-label">The body</div>
+                <div class="question-text">When you think about the thing you're fighting, where does your body hold the fight? Jaw, chest, shoulders, stomach? What happens when you try to release it physically?</div>
+                <div class="question-note">This is experiential. Pause and actually do it before answering.</div>
+            </div>
+        </div>
+
+        <div class="callout cool">
+            <div class="callout-label">Facilitator note</div>
+            <p>This discussion can go deep fast. Hold space for grief. Turning the mind toward painful realities often opens up the emotions that non-acceptance was keeping at bay. That's therapeutic, but it needs containment. If someone breaks open, validate the courage of the turn rather than rushing to comfort.</p>
+        </div>
+
+        <div class="page-nav">
+            <button onclick="showPage(4)">&#8592; Practice</button>
+            <button onclick="showPage(6)">Closing &#8594;</button>
+        </div>
+    </div>
+
+
+    <!-- ======================== CLOSING ======================== -->
+    <div class="page">
+
+        <div class="section-label warm">Closing</div>
+        <h2><span class="timing">5 to 8 min</span>Taking it with you</h2>
+
+        <h3>This week's practice</h3>
+        <p class="body-text">Pick one practice to carry with you this week.</p>
+
+        <div class="options-grid">
+            <div class="option" onclick="selectOption(this)">
+                <div class="option-label">Notice the fight</div>
+                <div class="option-desc">Catch yourself fighting reality at least once a day. Just notice. Don't force acceptance yet.</div>
+            </div>
+            <div class="option" onclick="selectOption(this)">
+                <div class="option-label">Practice the turn</div>
+                <div class="option-desc">Pick one specific reality you're resisting and practice turning toward it. Expect to turn away. Turn back.</div>
+            </div>
+            <div class="option" onclick="selectOption(this)">
+                <div class="option-label">Body check</div>
+                <div class="option-desc">Three times a day, check where your body is holding non-acceptance. Unclench. Open your hands. Breathe.</div>
+            </div>
+            <div class="option" onclick="selectOption(this)">
+                <div class="option-label">Name the willfulness</div>
+                <div class="option-desc">When you notice "I shouldn't have to," pause and ask: "What would willingness look like here?"</div>
+            </div>
+        </div>
+
+        <hr class="divider">
+
+        <div class="section-label">Checkout</div>
+        <h2>One sentence</h2>
+        <p class="body-text">
+            Complete this sentence: "The reality I'm going to practice turning toward this week is ___."
+        </p>
+        <p class="body-text">
+            It doesn't have to be the biggest thing. Start where you can actually practice.
+        </p>
+
+        <div class="callout cool">
+            <div class="callout-label">Facilitator note</div>
+            <p>Normalize that this is hard. Turning the mind toward painful reality is one of the most courageous things a person can do. If someone is tearful during checkout, that's the skill in action, not a sign that something went wrong. Name it: "That's what turning the mind looks like."</p>
+        </div>
+
+        <div class="footer">
+            <strong>Crisis resources</strong><br>
+            988 Suicide & Crisis Lifeline: call or text <strong>988</strong><br>
+            Crisis Text Line: text <strong>HELLO</strong> to 741741
+        </div>
+    </div>
+
+</div>
+
+<script>
+    const pages = document.querySelectorAll('.page');
+    const navBtns = document.querySelectorAll('.nav button');
+
+    function showPage(idx, btn) {
+        pages.forEach(p => p.classList.remove('active'));
+        navBtns.forEach(b => b.classList.remove('active'));
+        pages[idx].classList.add('active');
+        navBtns[idx].classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function toggleAcc(header) {
+        header.parentElement.classList.toggle('open');
+    }
+
+    function toggleTurnStep(step) {
+        const wasActive = step.classList.contains('active');
+        step.parentElement.querySelectorAll('.turn-step').forEach(s => s.classList.remove('active'));
+        if (!wasActive) step.classList.add('active');
+    }
+
+    function selectFork(el, type) {
+        el.parentElement.querySelectorAll('.fork-path').forEach(p => p.classList.remove('selected'));
+        el.classList.add('selected');
+    }
+
+    function revealScenario(id, btn) {
+        const panel = document.getElementById(id);
+        panel.classList.add('show');
+        btn.classList.add('revealed');
+        btn.textContent = 'Response shown';
+        btn.disabled = true;
+    }
+
+    function selectOption(el) {
+        el.classList.toggle('selected');
+    }
+</script>
+
+</body>
+</html>
